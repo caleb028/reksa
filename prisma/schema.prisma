@@ -1,0 +1,912 @@
+// Prisma schema for MALI TRACE KENYA
+// Compatible with SQLite for zero-friction local execution, ready for PostgreSQL / PostGIS in production.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(cuid())
+  name            String
+  email           String           @unique
+  passwordHash    String?
+  phone           String?
+  role            String           @default("BUYER") // USER, BUYER, INVESTOR, AGENT, LANDLORD, DEVELOPER, PROFESSIONAL, MODERATOR, ADMIN, SUPER_ADMIN
+  avatar          String?
+  isVerified      Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // Relationships
+  properties      Property[]       @relation("AgentProperties")
+  savedProperties SavedProperty[]
+  savedSearches   SavedSearch[]
+  propertyAlerts  PropertyAlert[]
+  reviews         Review[]
+  notifications   Notification[]
+  auditLogs       AuditLog[]
+  payments        Payment[]
+  paymentIntents  PaymentIntent[]
+  paymentReceipts PaymentReceipt[]
+  subscriptions   Subscription[]
+  organizationMemberships OrganizationMember[]
+
+  // Profiles
+  agentProfile        Agent?
+  developerProfile    Developer?
+  professionalProfile Professional?
+  
+  sentMessages     Message[]        @relation("SentMessages")
+  conversations    ConversationParticipant[]
+  serviceRequests  ServiceRequest[] @relation("ClientRequests")
+  aiConversations  AIConversation[]
+  listingReports   ListingReport[]  @relation("Reporter")
+}
+
+model County {
+  id             String          @id @default(cuid())
+  code           Int             @unique // 1 to 47
+  name           String          @unique
+  capital        String
+  region         String
+  latitude       Float
+  longitude      Float
+  neighbourhoods Neighbourhood[]
+  properties     Property[]
+  developments   Development[]
+  createdAt      DateTime        @default(now())
+}
+
+model Neighbourhood {
+  id                String       @id @default(cuid())
+  name              String
+  slug              String       @unique
+  countyId          String
+  county            County       @relation(fields: [countyId], references: [id])
+  town              String
+  latitude          Float
+  longitude         Float
+  description       String
+  medianAskingPrice Float        @default(0)
+  rentalYieldAvg    Float        @default(0)
+  developmentScore  Int          @default(70) // 1-100
+  securityRating    Float        @default(4.0)
+  infrastructureRating Float     @default(4.0)
+  floodRiskLevel    String       @default("Low") // Low, Moderate, High
+  schoolsCount      Int          @default(5)
+  hospitalsCount    Int          @default(3)
+  shoppingCount     Int          @default(4)
+  transitAccess     String       @default("Excellent")
+  aiSummary         String?
+  properties        Property[]
+  developments      Development[]
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+model Property {
+  id                 String       @id @default(cuid())
+  passportId         String       @unique // e.g. MLT-NBI-008421
+  title              String
+  slug               String       @unique
+  description        String
+  propertyType       String       // Apartment, Mansionette, Townhouse, Villa, Land, Commercial, Penthouse
+  listingIntent      String       @default("SALE") // SALE, RENT, LEASE
+  price              Float
+  currency           String       @default("KES")
+  rentalYieldEstimate Float?
+  estimatedMonthlyRent Float?
+
+  // Specs
+  bedrooms           Int?
+  bathrooms          Float?
+  sizeSqm            Float?
+  landAcreage        Float?
+  furnished          Boolean      @default(false)
+  gatedCommunity     Boolean      @default(false)
+  parkingSpaces      Int          @default(1)
+  yearBuilt          Int?
+
+  // Apartment & Multi-unit Specific Fields
+  floorNumber        Int?
+  totalFloors        Int?
+  apartmentBlock     String?
+  unitNumber         String?
+  monthlyRent        Float?
+  serviceCharge      Float?
+  deposit            Float?
+  balcony            Boolean      @default(false)
+  elevator           Boolean      @default(false)
+  borehole           Boolean      @default(false)
+  backupGenerator    Boolean      @default(false)
+  cctv               Boolean      @default(false)
+  swimmingPool       Boolean      @default(false)
+  gym                Boolean      @default(false)
+  childrenPlayArea   Boolean      @default(false)
+  garden             Boolean      @default(false)
+  solarWaterHeater   Boolean      @default(false)
+  petFriendly        Boolean      @default(false)
+  internetReady      Boolean      @default(true)
+  servantQuarter     Boolean      @default(false)
+  completionStatus   String?      // READY_TO_OCCUPY, UNDER_CONSTRUCTION, OFF_PLAN
+  furnishingStatus   String?      // UNFURNISHED, SEMI_FURNISHED, FULLY_FURNISHED
+
+  // Geographical
+  countyId           String
+  county             County       @relation(fields: [countyId], references: [id])
+  neighbourhoodId    String?
+  neighbourhood      Neighbourhood? @relation(fields: [neighbourhoodId], references: [id])
+  town               String
+  estate             String?
+  address            String
+  latitude           Float
+  longitude          Float
+
+  // Trust & Verification
+  trustScore         Int          @default(75) // 0-100
+  verificationLevel  Int          @default(0)  // 0 to 5
+  verificationStatus String       @default("UNVERIFIED") // UNVERIFIED, SUBMITTED, REVIEWED, INSPECTED, AUTHORIZED_VERIFIED
+  isFeatured         Boolean      @default(false)
+  status             String       @default("ACTIVE") // ACTIVE, PENDING, SOLD, RENTED, MODERATION
+
+  // Ownership / Lister & Multi-Tenant Organization
+  sellerType            String       @default("REAL_ESTATE_COMPANY") // INDIVIDUAL_SELLER, INDEPENDENT_AGENT, REAL_ESTATE_COMPANY, DEVELOPER
+  agentId               String?
+  agent                 User?        @relation("AgentProperties", fields: [agentId], references: [id])
+  organizationId        String?
+  organization          Organization? @relation(fields: [organizationId], references: [id])
+  assignedAgentMemberId String?
+  assignedAgentMember   OrganizationMember? @relation("AssignedAgentListings", fields: [assignedAgentMemberId], references: [id])
+  developmentId         String?
+  development           Development? @relation(fields: [developmentId], references: [id])
+
+  // Quality & Risk Metrics
+  listingQualityScore Int         @default(80)
+  isDuplicateCandidate Boolean    @default(false)
+  duplicateSimilarity Float?
+  duplicateCandidateId String?
+
+  // Relational details
+  images             PropertyImage[]
+  documents          PropertyDocument[]
+  amenities          PropertyAmenity[]
+  passport           PropertyPassport?
+  history            PropertyHistory[]
+  priceHistory       PropertyPriceHistory[]
+  inspections        PropertyInspection[]
+  verifications      PropertyVerification[]
+  savedBy            SavedProperty[]
+  aiAnalyses         AIAnalysis[]
+  riskSignals        RiskSignal[]
+  reports            ListingReport[]
+  reviews            Review[]
+  leads              Lead[]
+  viewingRequests    ViewingRequest[]
+  paymentIntents     PaymentIntent[]
+  entitlement        ListingEntitlement?
+
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+model PropertyImage {
+  id             String   @id @default(cuid())
+  propertyId     String
+  property       Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  url            String
+  caption        String?
+  roomType       String?  // Bedroom, Kitchen, Living, Bathroom, Exterior, Balcony, Floorplan
+  isPrimary      Boolean  @default(false)
+  aiQualityScore Int?     // 0-100
+  isAIGenerated  Boolean  @default(false)
+  orderIndex     Int      @default(0)
+  createdAt      DateTime @default(now())
+}
+
+model PropertyDocument {
+  id             String   @id @default(cuid())
+  propertyId     String
+  property       Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  docType        String   // Title_Deed, Sectional_Plan, Allotment_Letter, Mutation_Form, Land_Rates_Receipt, Building_Approval
+  documentNumber String?  // e.g. LR 209/12345
+  fileUrl        String
+  fileName       String
+  fileSize       Int
+  completenessScore Int   @default(80)
+  isPublic       Boolean  @default(false)
+  aiNotes        String?
+  verifiedAt     DateTime?
+  status         String   @default("PENDING_REVIEW") // PENDING_REVIEW, ANALYSED, VERIFIED_INTERNAL, REJECTED
+  createdAt      DateTime @default(now())
+}
+
+model PropertyPassport {
+  id                 String   @id @default(cuid())
+  propertyId         String   @unique
+  property           Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  passportNumber     String   @unique
+  initialRegistered  DateTime @default(now())
+  lastVerified       DateTime?
+  blockchainTxHash   String?
+  ownershipChainJson String   @default("[]") // JSON of historical transfers
+  riskLevel          String   @default("LOW") // LOW, MODERATE, ELEVATED, HIGH
+  structuralStatus   String   @default("Sound")
+  boundaryConfidence Float    @default(0.9)
+  changesDetected    String   @default("None recorded")
+  publicNotes        String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model PropertyPriceHistory {
+  id             String   @id @default(cuid())
+  propertyId     String
+  property       Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  price          Float
+  changePercentage Float?
+  effectiveYear  Int
+  event          String   // LISTED, PRICE_INCREASE, PRICE_DROP, SOLD, RENOVATED
+  recordedAt     DateTime @default(now())
+}
+
+model PropertyHistory {
+  id             String   @id @default(cuid())
+  propertyId     String
+  property       Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  title          String
+  description    String
+  actor          String
+  eventType      String   // CREATED, PRICE_CHANGED, VERIFIED, INSPECTED, OCCUPIED, REVISION
+  timestamp      DateTime @default(now())
+}
+
+model PropertyAmenity {
+  id             String   @id @default(cuid())
+  propertyId     String
+  property       Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name           String   // e.g. Borehole, Swimming Pool, Gym, Backup Generator, High Speed Lifts
+  category       String   @default("General") // Security, Utilities, Wellness, Convenience
+}
+
+model PropertyVerification {
+  id                 String    @id @default(cuid())
+  propertyId         String
+  property           Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  level              Int       // 0 to 5
+  status             String    // PENDING, APPROVED, REJECTED, REQUIRES_DOCS
+  verifiedBy         String?   // Reviewer name or "Automated System"
+  officialRegistryRef String?  // e.g. ArdhiSasa search tracking ref (mock or real)
+  notes              String
+  evidenceJson       String?   // JSON structured evidence breakdown
+  verifiedAt         DateTime?
+  createdAt          DateTime  @default(now())
+}
+
+model Development {
+  id                 String               @id @default(cuid())
+  name               String
+  slug               String               @unique
+  developerId        String
+  developer          Developer            @relation(fields: [developerId], references: [id])
+  organizationId     String?
+  organization       Organization?        @relation(fields: [organizationId], references: [id])
+  countyId           String
+  county             County               @relation(fields: [countyId], references: [id])
+  neighbourhoodId    String?
+  neighbourhood      Neighbourhood?       @relation(fields: [neighbourhoodId], references: [id])
+  town               String
+  estate             String?
+  address            String
+  description        String
+  coverImage         String
+  imagesJson         String               @default("[]")
+  stage              String               // Planning, Foundation, Structure, Roofing, Finishing, Handover, Completed
+  overallProgress    Int                  @default(0) // 0-100%
+  expectedCompletion String               // e.g. "Q4 2026"
+  totalUnits         Int                  @default(50)
+  availableUnits     Int                  @default(20)
+  startingPrice      Float
+  currency           String               @default("KES")
+  amenitiesJson      String               @default("[]")
+  latitude           Float
+  longitude          Float
+  units              DevelopmentUnit[]
+  progressUpdates    ConstructionUpdate[]
+  properties         Property[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+}
+
+model DevelopmentUnit {
+  id             String      @id @default(cuid())
+  developmentId  String
+  development    Development @relation(fields: [developmentId], references: [id], onDelete: Cascade)
+  unitType       String      // 1 Bedroom, 2 Bedroom, 3 Bedroom, Penthouse, Studio
+  sizeSqm        Float
+  price          Float
+  availableCount Int         @default(1)
+  floorPlanUrl   String?
+  status         String      @default("AVAILABLE") // AVAILABLE, RESERVED, SOLD
+}
+
+model ConstructionUpdate {
+  id             String      @id @default(cuid())
+  developmentId  String
+  development    Development @relation(fields: [developmentId], references: [id], onDelete: Cascade)
+  title          String
+  description    String
+  milestone      String      // Foundation, Structure, Roofing, Finishing, External
+  progressPct    Int         // Percentage
+  imageUrl       String?
+  recordedDate   DateTime    @default(now())
+  verifiedByInspector Boolean @default(false)
+}
+
+model Agent {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agencyName     String?
+  licenseNumber  String?
+  experienceYears Int     @default(3)
+  countiesServed String   @default("Nairobi, Kiambu")
+  rating         Float    @default(4.8)
+  reviewCount    Int      @default(12)
+  verifiedAgent  Boolean  @default(true)
+  bio            String?
+  createdAt      DateTime @default(now())
+}
+
+model Developer {
+  id             String        @id @default(cuid())
+  userId         String        @unique
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName    String
+  regNumber      String?
+  completedProjects Int        @default(5)
+  trackRecordYears Int         @default(8)
+  verifiedDeveloper Boolean    @default(true)
+  description    String?
+  website        String?
+  developments   Development[]
+  createdAt      DateTime      @default(now())
+}
+
+model Professional {
+  id              String           @id @default(cuid())
+  userId          String           @unique
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  professionType  String           // Inspector, Valuer, Surveyor, Architect, Quantity_Surveyor, Property_Manager, Lawyer
+  boardRegNumber  String?          // e.g. EBK, BORAQS, ISK, LSK
+  yearsExperience Int              @default(5)
+  countiesServed  String           @default("Nairobi, Kiambu, Machakos, Kajiado")
+  hourlyRate      Float            @default(5000)
+  rating          Float            @default(4.9)
+  reviewCount     Int              @default(18)
+  verifiedStatus  Boolean          @default(true)
+  bio             String?
+  services        Service[]
+  serviceRequests ServiceRequest[]
+  inspectionReports InspectionReport[]
+  createdAt       DateTime         @default(now())
+}
+
+model Service {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id], onDelete: Cascade)
+  name           String
+  description    String
+  estimatedCost  Float
+  turnaroundDays Int          @default(3)
+}
+
+model ServiceRequest {
+  id             String       @id @default(cuid())
+  clientId       String
+  client         User         @relation("ClientRequests", fields: [clientId], references: [id])
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+  serviceType    String
+  propertyAddress String
+  requestedDate  DateTime
+  budget         Float?
+  status         String       @default("PENDING") // PENDING, ACCEPTED, IN_PROGRESS, COMPLETED, CANCELLED
+  notes          String?
+  createdAt      DateTime     @default(now())
+}
+
+model PropertyInspection {
+  id              String            @id @default(cuid())
+  propertyId      String
+  property        Property          @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  inspectorName   String
+  inspectionDate  DateTime          @default(now())
+  overallRating   Float             @default(8.5) // out of 10
+  status          String            @default("COMPLETED")
+  report          InspectionReport?
+  createdAt       DateTime          @default(now())
+}
+
+model InspectionReport {
+  id                     String             @id @default(cuid())
+  inspectionId           String             @unique
+  inspection             PropertyInspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  professionalId         String?
+  professional           Professional?      @relation(fields: [professionalId], references: [id])
+  structuralObservations String
+  plumbingObservations   String
+  electricalObservations String
+  roofingObservations    String
+  finishesObservations   String
+  safetyObservations     String
+  recommendations        String
+  photosJson             String             @default("[]")
+  inspectorSignature     String?
+  createdAt              DateTime           @default(now())
+}
+
+model AIAnalysis {
+  id                   String   @id @default(cuid())
+  propertyId           String
+  property             Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  investmentScore      Int      @default(80)
+  affordabilityScore   Int      @default(75)
+  locationScore        Int      @default(85)
+  rentalPotentialScore Int      @default(82)
+  valueScore           Int      @default(78)
+  riskSignalScore      Int      @default(15) // Lower is better risk
+  overallScore         Int      @default(83)
+  summaryText          String
+  positiveFactorsJson  String   @default("[]")
+  riskSignalsJson      String   @default("[]")
+  assumptionsJson      String   @default("[]")
+  dataSourcesJson      String   @default("[]")
+  confidenceLevel      String   @default("High") // High, Medium, Low, Insufficient
+  createdAt            DateTime @default(now())
+}
+
+model RiskSignal {
+  id             String   @id @default(cuid())
+  propertyId     String
+  property       Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  severity       String   // LOW, REVIEW_RECOMMENDED, ELEVATED, HIGH
+  signalType     String   // DUPLICATE_PHOTO, UNUSUAL_PRICE_DROP, MISSING_DEED_DATA, INCONSISTENT_SPECS
+  title          String
+  description    String
+  isResolved     Boolean  @default(false)
+  moderatorNotes String?
+  detectedAt     DateTime @default(now())
+}
+
+model ListingReport {
+  id          String   @id @default(cuid())
+  propertyId  String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  reporterId  String
+  reporter    User     @relation("Reporter", fields: [reporterId], references: [id])
+  reason      String   // Suspected Fraud, Inaccurate Price, Wrong Location, Duplicate, Other
+  details     String
+  status      String   @default("PENDING") // PENDING, INVESTIGATING, RESOLVED, DISMISSED
+  createdAt   DateTime @default(now())
+}
+
+model Conversation {
+  id           String                    @id @default(cuid())
+  subject      String?
+  participants ConversationParticipant[]
+  messages     Message[]
+  updatedAt    DateTime                  @updatedAt
+  createdAt    DateTime                  @default(now())
+}
+
+model ConversationParticipant {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id])
+  content        String
+  attachmentUrl  String?
+  read           Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+}
+
+model AIConversation {
+  id        String      @id @default(cuid())
+  userId    String?
+  user      User?       @relation(fields: [userId], references: [id])
+  messages  AIMessage[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model AIMessage {
+  id             String         @id @default(cuid())
+  conversationId String
+  conversation   AIConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         String         // user, assistant, system, tool
+  content        String
+  toolCallsJson  String?
+  createdAt      DateTime       @default(now())
+}
+
+model SavedProperty {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  notes      String?
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, propertyId])
+}
+
+model SavedSearch {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  filtersJson String   // JSON object of applied query params
+  alertFrequency String @default("DAILY") // INSTANT, DAILY, WEEKLY, NONE
+  createdAt   DateTime @default(now())
+}
+
+model PropertyAlert {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  county      String?
+  propertyType String?
+  maxPrice    Float?
+  minYield    Float?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   // VERIFICATION, PRICE_DROP, ALERT, SYSTEM, MESSAGE
+  linkUrl   String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Payment {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  amount        Float
+  currency      String   @default("KES")
+  method        String   // MPESA, CARD, BANK
+  mpesaCheckoutId String?
+  mpesaReceiptNo String?
+  phoneNumber   String?
+  description   String
+  status        String   // PENDING, COMPLETED, FAILED
+  createdAt     DateTime @default(now())
+}
+
+model Subscription {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  planName    String    // BUYER_PREMIUM, AGENT_PRO, DEVELOPER_PRO, PROFESSIONAL_PRO
+  startDate   DateTime  @default(now())
+  endDate     DateTime
+  isActive    Boolean   @default(true)
+  billingCycle String   @default("MONTHLY") // MONTHLY, ANNUAL
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  rating     Int      // 1 to 5
+  comment    String
+  createdAt  DateTime @default(now())
+}
+
+model AuditLog {
+  id             String        @id @default(cuid())
+  userId         String?
+  user           User?         @relation(fields: [userId], references: [id])
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  action         String        // e.g. VERIFIED_PROPERTY, FLAGGED_LISTING, REJECTED_DOCUMENT, MEMBER_INVITED
+  targetType     String        // Property, User, Document, Payment, Organization
+  targetId       String
+  details        String
+  ipAddress      String?
+  createdAt      DateTime      @default(now())
+}
+
+model Organization {
+  id                 String               @id @default(cuid())
+  name               String
+  slug               String               @unique
+  businessType       String               // INDIVIDUAL_SELLER, INDEPENDENT_AGENT, REAL_ESTATE_COMPANY, DEVELOPER, PROPERTY_MANAGER, PROFESSIONAL_FIRM
+  description        String?
+  logo               String?
+  coverImage         String?
+  phone              String?
+  email              String?
+  website            String?
+  county             String?
+  town               String?
+  address            String?
+  registrationNumber String?
+  taxPin             String?
+  verificationStatus String               @default("PENDING") // PENDING, UNDER_REVIEW, VERIFIED, REJECTED, SUSPENDED
+  verificationBadge  String?              // REKSA VERIFIED COMPANY, IDENTITY VERIFIED, etc.
+  verifiedAt         DateTime?
+  trustScore         Int                  @default(75)
+  subscriptionTier   String               @default("FREE") // FREE, BUSINESS, PROFESSIONAL, ENTERPRISE
+  subscriptionStatus String               @default("ACTIVE")
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+
+  members            OrganizationMember[]
+  invitations        OrganizationInvitation[]
+  properties         Property[]
+  developments       Development[]
+  leads              Lead[]
+  viewingRequests    ViewingRequest[]
+  auditLogs          AuditLog[]
+  paymentIntents     PaymentIntent[]
+  paymentReceipts    PaymentReceipt[]
+  listingEntitlements ListingEntitlement[]
+}
+
+model OrganizationMember {
+  id                 String       @id @default(cuid())
+  organizationId     String
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId             String
+  user               User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role               String       @default("AGENT") // OWNER, ADMIN, BRANCH_MANAGER, AGENT, LISTING_MANAGER, VIEWER
+  title              String?      // e.g. "Senior Property Consultant", "Managing Director"
+  phone              String?
+  isActive           Boolean      @default(true)
+  joinedAt           DateTime     @default(now())
+
+  assignedListings   Property[]   @relation("AssignedAgentListings")
+  assignedLeads      Lead[]       @relation("AgentAssignedLeads")
+
+  @@unique([organizationId, userId])
+}
+
+model OrganizationInvitation {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  email          String
+  role           String       @default("AGENT")
+  token          String       @unique
+  invitedBy      String
+  expiresAt      DateTime
+  status         String       @default("PENDING") // PENDING, ACCEPTED, DECLINED, EXPIRED
+  createdAt      DateTime     @default(now())
+}
+
+model Lead {
+  id                   String              @id @default(cuid())
+  organizationId       String?
+  organization         Organization?       @relation(fields: [organizationId], references: [id])
+  propertyId           String?
+  property             Property?           @relation(fields: [propertyId], references: [id])
+  assignedAgentId      String?
+  assignedAgent        OrganizationMember? @relation("AgentAssignedLeads", fields: [assignedAgentId], references: [id])
+  clientName           String
+  clientEmail          String
+  clientPhone          String
+  message              String?
+  source               String              @default("MARKETPLACE_CARD") // MARKETPLACE_CARD, PROPERTY_DETAIL, DIRECT_ENQUIRY, WHATSAPP, VIEWING_REQUEST
+  status               String              @default("NEW_INQUIRY") // NEW_INQUIRY, CONTACTED, VIEWING_SCHEDULED, OFFER_MADE, CLOSED_WON, LOST
+  budget               Float?
+  notes                String?             // Private internal CRM notes
+  isUnlocked           Boolean             @default(false)
+  unlockFeeKes         Float               @default(200)
+  unlockedAt           DateTime?
+  consentGiven         Boolean             @default(true) // Kenya Data Protection Act 2019
+  preQualifiedMortgage Boolean             @default(false)
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+}
+
+model ViewingRequest {
+  id             String        @id @default(cuid())
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  propertyId     String
+  property       Property      @relation(fields: [propertyId], references: [id])
+  clientName     String
+  clientPhone    String
+  clientEmail    String
+  preferredDate  DateTime
+  timeSlot       String        @default("Morning") // Morning, Afternoon, Evening
+  status         String        @default("PENDING") // PENDING, CONFIRMED, COMPLETED, RESCHEDULED, CANCELLED
+  notes          String?
+  createdAt      DateTime      @default(now())
+}
+
+model MortgageLead {
+  id                    String   @id @default(cuid())
+  userId                String?
+  propertyId            String?
+  fullName              String
+  phoneNumber           String
+  email                 String
+  employmentType        String   @default("SALARIED") // SALARIED, SELF_EMPLOYED, BUSINESS_OWNER, DIASPORA
+  monthlyNetIncome      Float
+  existingMonthlyDebts  Float    @default(0)
+  downPaymentAmount     Float
+  maxLoanAmount         Float
+  targetPropertyPrice   Float
+  preferredLender       String?  // KCB, NCBA, STANBIC, COOP_BANK, STIMA_SACCO, KMRC_AFFORDABLE
+  status                String   @default("SUBMITTED") // SUBMITTED, PRE_QUALIFIED, SENT_TO_LENDER, IN_REVIEW, APPROVED, FUNDED, REJECTED
+  referralCommissionKes Float    @default(0)
+  referralPaidAt        DateTime?
+  notes                 String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model InsuranceQuote {
+  id                        String   @id @default(cuid())
+  propertyId                String?
+  userId                    String?
+  clientName                String
+  clientPhone               String
+  clientEmail               String
+  insuranceType             String   @default("HOME_AND_FIRE") // HOME_AND_FIRE, LANDLORD_PROTECTION, CONSTRUCTION_ALL_RISK
+  propertyValue             Float
+  estimatedAnnualPremiumKes Float
+  selectedInsurer           String   @default("JUBILEE") // JUBILEE, BRITAM, ICEA_LION, CIC_GROUP
+  status                    String   @default("QUOTE_GENERATED") // QUOTE_GENERATED, POLICY_REQUESTED, ISSUED, COMMISSION_PAID
+  referralFeeKes            Float    @default(0)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// REKSA COMMERCIAL MONETIZATION, PRICING & PAYMENT MODELS
+// -------------------------------------------------------------
+
+model PaymentIntent {
+  id                    String            @id @default(cuid())
+  publicReference       String            @unique // e.g. REKSA-PAY-2026-090123
+  userId                String?
+  user                  User?             @relation(fields: [userId], references: [id])
+  organizationId        String?
+  organization          Organization?     @relation(fields: [organizationId], references: [id])
+  propertyId            String?
+  property              Property?         @relation(fields: [propertyId], references: [id])
+  productType           String            // LISTING, LISTING_RENEWAL, FEATURED_LISTING, SEARCH_BOOST, HOMEPAGE_SPOTLIGHT, SUBSCRIPTION, VERIFICATION_SERVICE, PROFESSIONAL_SERVICE, ENTERPRISE_SERVICE
+  description           String
+  amount                Float             // In KES
+  currency              String            @default("KES")
+  phoneNumberMasked     String?           // e.g. +254 7••• ••123
+  phoneNumberRaw        String?           // Secure server-side normalized number (e.g. 254712345678)
+  status                String            @default("CREATED") // CREATED, PENDING, PROCESSING, SUCCESS, FAILED, CANCELLED, EXPIRED, REFUNDED, RECONCILIATION_REQUIRED
+  provider              String            @default("MPESA_DARAJA")
+  merchantRequestId     String?
+  checkoutRequestId     String?           @unique
+  providerReceiptNumber String?           // Safaricom M-Pesa Receipt (e.g. NLJ7RT61SV)
+  idempotencyKey        String?           @unique
+  failureReason         String?
+  metadataJson          String?           @default("{}")
+  expiresAt             DateTime?
+  completedAt           DateTime?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  receipt               PaymentReceipt?
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([status])
+  @@index([checkoutRequestId])
+  @@index([publicReference])
+}
+
+model PricingRule {
+  id              String    @id @default(cuid())
+  productType     String    // LISTING, LISTING_RENEWAL, FEATURED_LISTING, SEARCH_BOOST, HOMEPAGE_SPOTLIGHT
+  propertyType    String?   // Apartment, Bedsitter, Studio, Townhouse, Maisonette, Villa, Land, Commercial, ALL
+  listingIntent   String?   // SALE, RENT, LEASE, ALL
+  countyName      String?   // Nairobi, Kiambu, Mombasa, ALL
+  durationDays    Int       @default(30)
+  baseFeeKes      Float     // KES amount
+  discountPercent Float     @default(0)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([productType, propertyType, listingIntent])
+}
+
+model VolumeDiscount {
+  id              String   @id @default(cuid())
+  tierName        String   // Tier 1 (1-5), Tier 2 (6-20), Tier 3 (21-50), Tier 4 (51+)
+  minListings     Int
+  maxListings     Int?
+  discountPercent Float
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+}
+
+model PromotionPlan {
+  id           String   @id @default(cuid())
+  code         String   @unique // FEATURED_LISTING, SEARCH_BOOST, HOMEPAGE_SPOTLIGHT, COUNTY_SPOTLIGHT
+  name         String
+  description  String
+  durationDays Int      @default(14)
+  priceKes     Float
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+model PaymentReceipt {
+  id              String        @id @default(cuid())
+  receiptNumber   String        @unique // e.g. REKSA-REC-2026-XXXXX
+  paymentIntentId String        @unique
+  paymentIntent   PaymentIntent @relation(fields: [paymentIntentId], references: [id], onDelete: Cascade)
+  organizationId  String?
+  organization    Organization? @relation(fields: [organizationId], references: [id])
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id])
+  amount          Float
+  currency        String        @default("KES")
+  paymentMethod   String        @default("M-Pesa (Safaricom Daraja)")
+  mpesaReceipt    String?
+  customerPhone   String?
+  productSummary  String
+  issuedAt        DateTime      @default(now())
+
+  @@index([receiptNumber])
+  @@index([organizationId])
+  @@index([userId])
+}
+
+model ListingEntitlement {
+  id                  String       @id @default(cuid())
+  propertyId          String       @unique
+  property            Property     @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  organizationId      String?
+  organization        Organization?@relation(fields: [organizationId], references: [id])
+  status              String       @default("ACTIVE") // ACTIVE, EXPIRED, PENDING_RENEWAL, PAUSED
+  startsAt            DateTime     @default(now())
+  validUntil          DateTime
+  isFeatured          Boolean      @default(false)
+  featuredUntil       DateTime?
+  searchBoostUntil    DateTime?
+  autoRenew           Boolean      @default(false)
+  lastPaymentIntentId String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  @@index([status, validUntil])
+  @@index([organizationId])
+}
+

@@ -1,0 +1,47 @@
+{
+  "name": "REKSA — Kenya's Intelligent Real Estate Marketplace",
+  "short_name": "REKSA",
+  "description": "Search, verify, analyse, discover, and invest in Kenya's verified real estate marketplace.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a3871",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/reksa-cube.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/reksa-cube.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "lifestyle", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Search Properties",
+      "url": "/buy",
+      "description": "Find apartments, houses, and land in Kenya"
+    },
+    {
+      "name": "Spatial Intelligence Map",
+      "url": "/map",
+      "description": "GIS zoning and neighbourhood analytics"
+    },
+    {
+      "name": "Saved Watchlist",
+      "url": "/saved",
+      "description": "View bookmarked investment properties"
+    },
+    {
+      "name": "Business Dashboard",
+      "url": "/dashboard",
+      "description": "Manage listings, CRM leads, and billing"
+    }
+  ]
+}

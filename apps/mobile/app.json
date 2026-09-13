@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "REKSA — Real Estate Kenya",
+    "slug": "reksa-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B3D2E"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ke.co.reksa.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "REKSA uses your location to discover verified cadastral property boundaries and nearby listings in Kenya."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B3D2E"
+      },
+      "package": "ke.co.reksa.mobile",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "apiBaseUrl": "https://reksa.co.ke/api",
+      "eaProjectId": "reksa-proptech-kenya"
+    }
+  }
+}
