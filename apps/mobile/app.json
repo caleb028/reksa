@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "REKSA — Real Estate Kenya",
-    "slug": "reksa-mobile",
+    "name": "A&E — Ardhi and Estates",
+    "slug": "ardhi-and-estates",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,9 +13,9 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "ke.co.reksa.mobile",
+      "bundleIdentifier": "ke.co.ardhiestates.mobile",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "REKSA uses your location to discover verified cadastral property boundaries and nearby listings in Kenya."
+        "NSLocationWhenInUseUsageDescription": "A&E uses your location to discover verified cadastral property boundaries and nearby listings in Kenya."
       }
     },
     "android": {
@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0B3D2E"
       },
-      "package": "ke.co.reksa.mobile",
+      "package": "ke.co.ardhiestates.mobile",
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -34,8 +34,8 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "apiBaseUrl": "https://reksa.co.ke/api",
-      "eaProjectId": "reksa-proptech-kenya"
+      "apiBaseUrl": "https://ardhiestates.co.ke/api",
+      "eaProjectId": "ardhi-estates-kenya"
     }
   }
 }

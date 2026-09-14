@@ -39,7 +39,7 @@ export function TrustExplainerModal({
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-black text-slate-900 dark:text-white">
-                REKSA Trust &amp; Verification Framework
+                A&amp;E Trust &amp; Verification Framework
               </h2>
               <span className="rounded-full bg-ochre-100 dark:bg-ochre-900/50 px-2.5 py-0.5 text-xs font-bold text-ochre-700 dark:text-ochre-300">
                 Score: {trustScore}/100
@@ -51,13 +51,13 @@ export function TrustExplainerModal({
           </div>
         </div>
 
-        {/* What REKSA Checks vs What Is NOT Guaranteed */}
+        {/* What A&E Checks vs What Is NOT Guaranteed */}
         <div className="space-y-5 my-6 text-xs sm:text-sm">
           {/* Section A: What We Verify */}
           <div className="rounded-2xl border border-forest-200/80 bg-forest-50/50 p-4 dark:border-forest-900/60 dark:bg-forest-950/30">
             <h3 className="font-bold text-forest-900 dark:text-forest-300 flex items-center gap-2 mb-2">
               <CheckCircle2 className="w-4 h-4 text-forest-600 dark:text-forest-400" />
-              <span>What REKSA Verifies &amp; Audits:</span>
+              <span>What A&amp;E Verifies &amp; Audits:</span>
             </h3>
             <ul className="space-y-1.5 text-forest-800 dark:text-forest-200/90 text-xs pl-6 list-disc">
               <li><strong>Document Presence &amp; Completeness:</strong> Audit of Title Deed copy, Sectional Plan, Allotment Letter, and Land Rates receipts.</li>
@@ -74,7 +74,7 @@ export function TrustExplainerModal({
               <span>Statutory Legal Limitation &amp; Due Diligence Notice:</span>
             </h3>
             <p className="text-xs text-amber-800 dark:text-amber-200/90 leading-relaxed mb-2">
-              Under the <strong>Land Registration Act (2012)</strong> and the <strong>Sectional Properties Act (2020)</strong> of Kenya, REKSA operates as an independent market intelligence platform. <strong>REKSA is NOT a statutory land registry or title insurer.</strong>
+              Under the <strong>Land Registration Act (2012)</strong> and the <strong>Sectional Properties Act (2020)</strong> of Kenya, A&amp;E operates as an independent market intelligence platform from Ardhi and Estates. <strong>A&amp;E is NOT a statutory land registry or title insurer.</strong>
             </p>
             <p className="text-xs text-amber-800 dark:text-amber-200/90 leading-relaxed">
               A high Trust Score verifies document consistency and physical inspection facts, but <em>does not guarantee statutory title validity</em> against undisclosed court disputes, caveats, or unregistered spousal consents. <strong>A formal official search at Ardhi House (Ministry of Lands) via a licensed advocate is mandatory before paying transaction deposits.</strong>

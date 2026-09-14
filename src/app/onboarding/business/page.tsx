@@ -126,7 +126,7 @@ export default function BusinessOnboardingPage() {
         <div className="text-center mb-10">
           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            REKSA Business Operating System
+            A&E Business Operating System
           </span>
           <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
             Create Your Real Estate Workspace

@@ -14,13 +14,13 @@ export interface CreateReceiptParams {
 
 export class PaymentReceiptService {
   /**
-   * Generates a unique, chronological REKSA receipt number
-   * e.g. REKSA-REC-2026-89412
+   * Generates a unique, chronological A&E receipt number
+   * e.g. AE-REC-2026-89412
    */
   public static generateReceiptNumber(): string {
     const year = new Date().getFullYear();
     const randomSuffix = Math.floor(10000 + Math.random() * 90000);
-    return `REKSA-REC-${year}-${randomSuffix}`;
+    return `AE-REC-${year}-${randomSuffix}`;
   }
 
   /**

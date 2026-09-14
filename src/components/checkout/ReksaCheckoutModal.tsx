@@ -36,6 +36,7 @@ interface ReksaCheckoutModalProps {
   onClose: () => void;
   item: CheckoutItem | null;
   onSuccess?: (paymentIntentId: string, receiptNumber?: string) => void;
+  onPaymentSuccess?: (receipt: any) => void;
 }
 
 type CheckoutStep = 'REVIEW' | 'PHONE' | 'AWAITING_STK';
@@ -45,7 +46,8 @@ export function ReksaCheckoutModal({
   isOpen,
   onClose,
   item,
-  onSuccess
+  onSuccess,
+  onPaymentSuccess
 }: ReksaCheckoutModalProps) {
   const { serverUser, notify } = useApp();
   const [step, setStep] = useState<CheckoutStep>('REVIEW');
@@ -103,7 +105,7 @@ export function ReksaCheckoutModal({
     setErrorMsg('');
 
     try {
-      const idempotencyKey = `REKSA-${item.productType}-${item.propertyId || item.planCode || 'INTENT'}-${Date.now()}`;
+      const idempotencyKey = `AE-${item.productType}-${item.propertyId || item.planCode || 'INTENT'}-${Date.now()}`;
 
       const res = await fetch('/api/payments/intent', {
         method: 'POST',
@@ -200,9 +202,10 @@ export function ReksaCheckoutModal({
           clearPolling();
           setStkState('SUCCESS');
           setMpesaReceipt(data.mpesaReceipt || 'CONFIRMED');
-          setReceiptNumber(data.receiptNumber || 'REKSA-REC-CONFIRMED');
+          setReceiptNumber(data.receiptNumber || 'AE-REC-CONFIRMED');
           notify('Payment Confirmed', 'Your transaction was verified by Safaricom Daraja.', 'success');
           if (onSuccess) onSuccess(targetIntentId, data.receiptNumber);
+          if (onPaymentSuccess) onPaymentSuccess(data.receipt || { receiptNumber: data.receiptNumber || 'AE-REC-CONFIRMED', intentId: targetIntentId });
           return;
         }
 
@@ -246,11 +249,16 @@ export function ReksaCheckoutModal({
 
         {/* Modal Brand Header */}
         <div className="flex items-center gap-2 mb-4">
-          <img src="/images/reksa-cube.png" alt="REKSA" className="h-7 w-auto object-contain" />
-          <span className="text-lg font-black tracking-tight text-[#0a3871] dark:text-white">
-            REKSA PAY
-          </span>
-          <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+          <img src="/images/reksa-cube.png" alt="A&E" className="h-7 w-auto object-contain" />
+          <div className="flex flex-col">
+            <span className="text-lg font-black tracking-tight text-[#0a3871] dark:text-white leading-none">
+              A&amp;E PAY
+            </span>
+            <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+              Ardhi &amp; Estates
+            </span>
+          </div>
+          <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 ml-auto">
             Safaricom M-Pesa
           </span>
         </div>
@@ -426,7 +434,7 @@ export function ReksaCheckoutModal({
                   <span className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Customer instructions:</span>
                   1. Unlock your phone.<br />
                   2. Enter your Safaricom M-Pesa PIN.<br />
-                  3. REKSA will automatically confirm and activate your listing.
+                  3. A&amp;E will automatically confirm and activate your listing.
                 </div>
               </div>
             )}
@@ -450,7 +458,7 @@ export function ReksaCheckoutModal({
                     <span className="font-mono font-bold text-slate-900 dark:text-white">{mpesaReceipt}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">REKSA Invoice:</span>
+                    <span className="text-slate-500">A&amp;E Invoice:</span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white">{receiptNumber}</span>
                   </div>
                   <div className="flex justify-between">
@@ -479,7 +487,7 @@ export function ReksaCheckoutModal({
                   Payment Was Not Completed
                 </h4>
                 <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto leading-relaxed">
-                  No money was confirmed by REKSA. {failureReason}
+                  No money was confirmed by A&amp;E. {failureReason}
                 </p>
 
                 <div className="mt-6 flex gap-2">
@@ -561,3 +569,5 @@ export function ReksaCheckoutModal({
     </div>
   );
 }
+
+export const AeCheckoutModal = ReksaCheckoutModal;

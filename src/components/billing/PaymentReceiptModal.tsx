@@ -72,16 +72,21 @@ export function PaymentReceiptModal({ isOpen, onClose, receipt }: PaymentReceipt
           <div className="flex items-start justify-between">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <img src="/images/reksa-cube.png" alt="REKSA" className="h-8 w-auto object-contain" />
-                <span className="text-xl font-black tracking-tight text-[#0a3871] dark:text-white">
-                  REKSA
-                </span>
+                <img src="/images/reksa-cube.png" alt="A&E" className="h-8 w-auto object-contain" />
+                <div className="flex flex-col">
+                  <span className="text-xl font-black tracking-tight text-[#0a3871] dark:text-white leading-none">
+                    A&amp;E
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400">
+                    Ardhi and Estates
+                  </span>
+                </div>
               </div>
               <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
                 Kenya&apos;s Intelligent Real Estate Platform
               </p>
               <p className="text-[10px] text-slate-400 mt-0.5">
-                Delta Corner Tower, Westlands, Nairobi • billing@reksa.co.ke
+                Delta Corner Tower, Westlands, Nairobi • billing@ardhiestates.co.ke
               </p>
             </div>
 
@@ -102,7 +107,7 @@ export function PaymentReceiptModal({ isOpen, onClose, receipt }: PaymentReceipt
             <div className="flex justify-between py-1 border-b border-slate-200/60 dark:border-slate-800">
               <span className="text-slate-500">Billed Entity:</span>
               <span className="font-bold text-slate-900 dark:text-white">
-                {receipt.organizationName || receipt.customerName || 'Verified REKSA User'}
+                {receipt.organizationName || receipt.customerName || 'Verified A&E User'}
               </span>
             </div>
 
@@ -157,7 +162,7 @@ export function PaymentReceiptModal({ isOpen, onClose, receipt }: PaymentReceipt
 
           {/* Footer Note */}
           <div className="pt-2 text-center text-[10px] text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800">
-            This electronic receipt was generated automatically by the REKSA platform upon trusted confirmation from Safaricom Daraja. It serves as official proof of payment for real-estate listing, advertising, or operating SaaS subscription services under Kenyan Tax Law.
+            This electronic receipt was generated automatically by the A&amp;E (Ardhi and Estates) platform upon trusted confirmation from Safaricom Daraja. It serves as official proof of payment for real-estate listing, advertising, or operating SaaS subscription services under Kenyan Tax Law.
           </div>
         </div>
       </div>

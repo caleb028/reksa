@@ -607,7 +607,7 @@ export default function DashboardPage() {
                     <div className="rounded-3xl border border-emerald-200 bg-emerald-50/50 p-6 dark:border-emerald-900/40 dark:bg-emerald-950/20 shadow-card">
                       <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs mb-2">
                         <ShieldCheck className="w-4 h-4" />
-                        <span>REKSA Agency Verification</span>
+                        <span>A&E Agency Verification</span>
                       </div>
                       <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                         ABC Properties is an officially accredited company. All listed properties receive automatic trust boost and priority placement.
@@ -759,7 +759,7 @@ export default function DashboardPage() {
                   <div>
                     <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
                       <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                      <span>REKSA Multi-Stage CRM Pipeline</span>
+                      <span>A&E Multi-Stage CRM Pipeline</span>
                     </h3>
                     <p className="text-xs text-slate-500">
                       Kenya Data Protection Act 2019 compliant. Track buyer journeys from verified inquiry to conveyancing handover.
@@ -1155,7 +1155,7 @@ export default function DashboardPage() {
                     <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">
                       Active Agency Operating Plan
                     </span>
-                    <h4 className="text-xl font-black text-slate-900 dark:text-white mt-0.5">REKSA Agency Professional</h4>
+                    <h4 className="text-xl font-black text-slate-900 dark:text-white mt-0.5">A&E Agency Professional</h4>
                     <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
                       Includes 35 active verified listings, unlimited CRM leads, up to 5 agent accounts, and branded store.
                     </p>
@@ -1163,7 +1163,7 @@ export default function DashboardPage() {
 
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleOpenPlanUpgrade('BUSINESS', 'REKSA Business Agency OS')}
+                      onClick={() => handleOpenPlanUpgrade('BUSINESS', 'A&E Business Agency OS')}
                       className="rounded-xl bg-blue-700 px-4 py-2 text-xs font-bold text-white hover:bg-blue-800 shadow-xs whitespace-nowrap"
                     >
                       Upgrade to Business Plan
@@ -1444,14 +1444,14 @@ export default function DashboardPage() {
         )}
 
         {/* ========================================================================= */}
-        {/* VIEW E: REKSA PLATFORM ADMIN                                              */}
+        {/* VIEW E: A&E PLATFORM ADMIN                                                */}
         {/* ========================================================================= */}
         {activeWorkspace.type === 'ADMIN' && (
           <div className="space-y-8 animate-in fade-in duration-200">
             <div className="rounded-3xl border border-red-200 bg-red-50/50 p-6 dark:border-red-900/40 dark:bg-red-950/20 shadow-card">
               <div className="flex items-center gap-2 text-red-800 dark:text-red-300 font-bold text-sm mb-1">
                 <ShieldCheck className="w-5 h-5" />
-                <span>REKSA Master System Intelligence Console</span>
+                <span>A&E Master System Intelligence Console</span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-300">
                 Authoritative verification queue, fraud mitigation holds, and platform-wide audit trail.
@@ -1755,7 +1755,7 @@ export default function DashboardPage() {
                   </h4>
                 </div>
                 <p className="text-xs text-slate-500 mb-4">
-                  Generate an instant policy quote with REKSA partner underwriters (Jubilee, Britam, ICEA LION) to protect the buyer from day of physical handover.
+                  Generate an instant policy quote with A&amp;E partner underwriters (Jubilee, Britam, ICEA LION) to protect the buyer from day of physical handover.
                 </p>
 
                 <HandoverInsuranceCard
@@ -1766,25 +1766,28 @@ export default function DashboardPage() {
 
               {/* Legal & Conveyancing Handover */}
               <div className="rounded-2xl border border-blue-200 bg-blue-50/50 p-4 dark:border-blue-900/60 dark:bg-blue-950/20">
-                <div className="flex items-start gap-3">
-                  <FileText className="w-5 h-5 text-blue-700 dark:text-blue-400 shrink-0 mt-0.5" />
-                  <div>
-                    <h5 className="font-bold text-xs text-blue-950 dark:text-blue-200">
-                      Step 2: Statutory Conveyancing &amp; Land Registration
-                    </h5>
-                    <p className="text-[11px] text-blue-900/80 dark:text-blue-300/80 mt-1 leading-relaxed">
-                      Statutory title deed transfer under the Land Registration Act 2012 / Sectional Properties Act 2020 requires official Land Registry deed search, rates clearance, and stamp duty payment (4% urban / 2% rural).
-                    </p>
-                    <div className="mt-3 flex items-center gap-2">
-                      <Link
-                        href="/professionals"
-                        className="inline-flex items-center gap-1.5 rounded-xl bg-blue-700 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-800 shadow-xs"
-                      >
-                        <span>Connect with Licensed Conveyancing Advocate</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <FileText className="w-4 h-4 text-blue-600" />
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white">
+                    Step 2: Conveyancing &amp; Title Transfer Handover
+                  </h4>
+                </div>
+                <p className="text-xs text-slate-500 mb-4">
+                  Retain a verified conveyancing advocate to handle completion documents, spousal consent affidavits, and stamp duty payments.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href={`https://wa.me/254722000000?text=${encodeURIComponent(
+                      `Hello, I would like to request legal conveyancing handover assistance for deal with buyer ${selectedWonLead.clientName} (Property: ${selectedWonLead.propertyTitle}).`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-forest-900 px-4 py-2 text-xs font-bold text-white hover:bg-forest-800 transition-colors shadow-xs"
+                  >
+                    <span>Connect with Retained Conveyancing Advocate</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -1802,21 +1805,20 @@ export default function DashboardPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* GENUINE SAFARICOM DARAJA M-PESA CHECKOUT MODAL                            */}
+      {/* CHECKOUT / UPGRADE / INVOICING MODAL                                      */}
       {/* ========================================================================= */}
       <ReksaCheckoutModal
         isOpen={checkoutModalOpen}
         onClose={() => setCheckoutModalOpen(false)}
         item={checkoutItem}
-        onSuccess={() => {
-          fetchReceipts();
-          fetchRevenueData();
-          notify('Payment Confirmed', 'Entitlements activated via Safaricom Daraja.', 'success');
+        onPaymentSuccess={(receipt) => {
+          setSelectedReceipt(receipt);
+          setReceiptModalOpen(true);
         }}
       />
 
       {/* ========================================================================= */}
-      {/* OFFICIAL REKSA PAYMENT RECEIPT MODAL                                      */}
+      {/* OFFICIAL A&E PAYMENT RECEIPT MODAL                                        */}
       {/* ========================================================================= */}
       <PaymentReceiptModal
         isOpen={receiptModalOpen}

@@ -89,14 +89,15 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
             <img
               src="/images/reksa-cube.png"
-              alt="REKSA PropTech Cube Logo"
+              alt="A&E (Ardhi & Estates) Logo"
               className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0a3871] dark:text-white">
-                REKSA
+              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0B3D2E] dark:text-white flex items-center gap-1.5">
+                <span>A&amp;E</span>
+                <span className="text-[11px] font-bold text-[#D4A24C] dark:text-amber-400 font-sans tracking-normal opacity-90 hidden sm:inline">(Ardhi &amp; Estates)</span>
               </span>
-              <span className="hidden sm:block text-[8px] font-bold tracking-wider text-[#b37f1b] dark:text-amber-400 uppercase">
+              <span className="hidden sm:block text-[8px] font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
                 Kenya&apos;s Intelligent Real Estate Platform
               </span>
             </div>
@@ -316,7 +317,7 @@ export function Navbar() {
                       <Building2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
                       <div>
                         <div className="font-bold">Agency &amp; Seller Onboarding</div>
-                        <div className="text-[10px] text-slate-500 dark:text-slate-400">Join the REKSA operating network</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">Join the A&amp;E operating network</div>
                       </div>
                     </Link>
                   </div>

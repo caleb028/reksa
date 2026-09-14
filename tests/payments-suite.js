@@ -1,5 +1,5 @@
 /**
- * REKSA — AUTOMATED PAYMENTS & REVENUE TEST SUITE
+ * A&E (Ardhi & Estates) — AUTOMATED PAYMENTS & REVENUE TEST SUITE
  * Tests Kenyan phone normalization, dynamic pricing rules, volume discounts,
  * Daraja STK push credentials & timestamp generation, callback metadata parsing,
  * idempotency defense, and official receipt creation.
@@ -304,7 +304,7 @@ async function runPaymentTests() {
 
   try {
     const idempotencyKey = `TEST-IDEM-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
-    const publicRef = `REKSA-PAY-TEST-${Date.now()}`;
+    const publicRef = `AE-PAY-TEST-${Date.now()}`;
 
     // 7.1 Create Intent
     const createdIntent = await prisma.paymentIntent.create({
@@ -345,7 +345,7 @@ async function runPaymentTests() {
 
     // --- SUITE 8: OFFICIAL RECEIPT GENERATION ---
     console.log('\n--- 8. OFFICIAL TAX RECEIPT ENGINE ---');
-    const receiptNumber = `REKSA-REC-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+    const receiptNumber = `AE-REC-2026-${Math.floor(10000 + Math.random() * 90000)}`;
     const createdReceipt = await prisma.paymentReceipt.create({
       data: {
         receiptNumber: receiptNumber,
@@ -358,7 +358,7 @@ async function runPaymentTests() {
       }
     });
     testReceiptId = createdReceipt.id;
-    recordResult('RECEIPT', 'Generate official REKSA-REC tax invoice record', createdReceipt.receiptNumber.startsWith('REKSA-REC-2026-'), `Receipt Number: ${createdReceipt.receiptNumber}`);
+    recordResult('RECEIPT', 'Generate official AE-REC tax invoice record', createdReceipt.receiptNumber.startsWith('AE-REC-2026-') || createdReceipt.receiptNumber.startsWith('REKSA-REC-2026-'), `Receipt Number: ${createdReceipt.receiptNumber}`);
     recordResult('RECEIPT', 'Receipt maps to correct payment amount (KES 500)', createdReceipt.amount === 500, `Amount: KES ${createdReceipt.amount}`);
 
     // --- SUITE 9: SERVICE ENTITLEMENT FULFILLMENT ---

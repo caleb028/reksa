@@ -17,18 +17,18 @@ export function Footer() {
             <div className="flex items-center gap-2.5 mb-3">
               <img
                 src="/images/reksa-cube.png"
-                alt="REKSA PropTech Cube Logo"
+                alt="A&E (Ardhi & Estates) Logo"
                 className="h-9 w-auto object-contain"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-black text-white tracking-tight">REKSA</span>
+                <span className="text-xl font-black text-white tracking-tight">A&amp;E</span>
                 <span className="text-[9px] font-bold text-[#c59228] tracking-wider uppercase">
-                  Real Estate Kenya Search & Analysis
+                  Ardhi &amp; Estates Kenya
                 </span>
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed mb-4">
-              REKSA (Real Estate Kenya Search & Analysis) is Kenya&apos;s premier digital property intelligence, search and verification platform. Providing algorithmic yield modeling, transparent verification signals, and market analysis across all 47 counties.
+              A&amp;E (Ardhi and Estates) is Kenya&apos;s premier digital property intelligence, search and verification platform. Providing algorithmic yield modeling, transparent verification signals, and market analysis across all 47 counties.
             </p>
             <div className="text-xs font-mono font-bold text-[#c59228]">
               SEARCH • VERIFY • ANALYSE • INVEST
@@ -57,7 +57,7 @@ export function Footer() {
               Intelligence & Tools
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/ai-advisor" className="hover:text-white transition-colors">REKSA AI Property Advisor</Link></li>
+              <li><Link href="/ai-advisor" className="hover:text-white transition-colors">A&amp;E AI Property Advisor</Link></li>
               <li><Link href="/tools/affordability" className="hover:text-white transition-colors">Affordability Estimator</Link></li>
               <li><Link href="/tools/investment" className="hover:text-white transition-colors">Mortgage & Scenario Simulator</Link></li>
               <li><Link href="/tools/document-review" className="hover:text-white transition-colors">AI Deed & Plan Reviewer</Link></li>
@@ -76,7 +76,7 @@ export function Footer() {
                 <AlertCircle className="w-3.5 h-3.5" />
                 <span>Statutory Notice</span>
               </div>
-              REKSA (Real Estate Kenya Search & Analysis) is an independent property technology and intelligence platform. We never certify official title deeds or state land registers. All automated title analyses and trust scores are algorithmic signals intended to assist certified advocates, surveyors, and valuers.
+              A&amp;E (Ardhi and Estates) is an independent property technology and intelligence platform. We never certify official title deeds or state land registers. All automated title analyses and trust scores are algorithmic signals intended to assist certified advocates, surveyors, and valuers.
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between border-t border-slate-800 pt-6 text-xs text-slate-500">
           <div>
-            © {new Date().getFullYear()} REKSA (Real Estate Kenya Search & Analysis). All rights reserved. Built for the Kenyan PropTech Ecosystem.
+            © {new Date().getFullYear()} A&amp;E (Ardhi and Estates). All rights reserved. Built for the Kenyan PropTech Ecosystem.
           </div>
           <div className="mt-2 sm:mt-0 flex gap-4">
             <Link href="/trust-safety" className="hover:text-slate-300">Trust Framework</Link>

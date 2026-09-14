@@ -1,5 +1,5 @@
 /**
- * REKSA — FINANCIAL SERVICES MARKETPLACE & COMPLIANCE TEST SUITE
+ * A&E (Ardhi and Estates) — FINANCIAL SERVICES MARKETPLACE & COMPLIANCE TEST SUITE
  * 
  * Verifies:
  * 1. KMRC 9.5% Subsidized vs Commercial Mortgage Pre-Qualification & 0.35% Referral Commission
@@ -44,7 +44,7 @@ function calculateMortgageTerms(propertyPrice, downPayment, monthlyIncome) {
   );
   
   const dtiRatio = (monthlyPayment / monthlyIncome) * 100;
-  const referralCommission = Math.round(loanAmount * 0.0035); // 0.35% REKSA referral take-rate
+  const referralCommission = Math.round(loanAmount * 0.0035); // 0.35% A&E referral take-rate
 
   return {
     loanAmount,
@@ -85,7 +85,7 @@ function maskKenyanPhone(phone) {
 
 async function runSuite() {
   console.log('================================================================');
-  console.log('REKSA FINANCIAL MARKETPLACE & REGULATORY AUTOMATED TEST SUITE');
+  console.log('A&E (Ardhi and Estates) FINANCIAL MARKETPLACE & REGULATORY TEST SUITE');
   console.log('================================================================\n');
 
   // TEST SUITE 1: MORTGAGE PRE-QUALIFICATION & KMRC SUBSIDY LOGIC

@@ -41,7 +41,7 @@ export function TabNavigator() {
       screenOptions={{
         headerShown: true,
         headerStyle: {
-          backgroundColor: '#0B3D2E', // REKSA Deep Forest Green
+          backgroundColor: '#0B3D2E', // A&E Deep Forest Green
         },
         headerTintColor: '#FAF8F4',
         headerTitleStyle: {
@@ -63,7 +63,7 @@ export function TabNavigator() {
         name="Search"
         component={SearchScreen}
         options={{
-          title: 'REKSA Search',
+          title: 'A&E Search',
           tabBarLabel: 'Discover',
           tabBarIcon: ({ color, size }) => <Search color={color} size={size} />
         }}

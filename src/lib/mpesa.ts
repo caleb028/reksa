@@ -43,7 +43,7 @@ export async function initiateMpesaSTKPush(payload: STKPushRequest): Promise<STK
 export const SUBSCRIPTION_TIERS = [
   {
     id: 'free',
-    name: 'REKSA Explorer',
+    name: 'A&E Explorer',
     priceKes: 0,
     interval: 'Always Free',
     badge: 'Standard',

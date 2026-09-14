@@ -16,7 +16,7 @@ export function AIChatWidget() {
     {
       role: 'assistant',
       content:
-        'Jambo! I am **REKSA AI**, your digital real estate advisor for Kenya. Ask me about property prices, rental yields, due diligence checklists, or search verified listings across all 47 counties.'
+        'Jambo! I am **A&E AI**, your digital real estate advisor for Kenya from **Ardhi and Estates**. Ask me about property prices, rental yields, due diligence checklists, or search verified listings across all 47 counties.'
     }
   ]);
   const [suggestedPrompts, setSuggestedPrompts] = useState<string[]>([
@@ -69,7 +69,7 @@ export function AIChatWidget() {
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0a3871]">
             <Bot className="h-4 w-4 text-[#c59228]" />
           </div>
-          <span className="text-xs font-extrabold tracking-wide">Ask REKSA AI</span>
+          <span className="text-xs font-extrabold tracking-wide">Ask A&E AI</span>
           <span className="flex h-2 w-2 rounded-full bg-[#c59228] animate-ping" />
         </button>
       )}
@@ -84,8 +84,8 @@ export function AIChatWidget() {
                 <Bot className="h-4 w-4" />
               </div>
               <div>
-                <span className="text-sm font-bold block">REKSA AI Advisor</span>
-                <span className="text-[10px] text-blue-200 block">Real Estate Search &amp; Analysis Intelligence</span>
+                <span className="text-sm font-bold block">A&E AI Advisor</span>
+                <span className="text-[10px] text-blue-200 block">Ardhi and Estates • Real Estate Intelligence</span>
               </div>
             </div>
             <button

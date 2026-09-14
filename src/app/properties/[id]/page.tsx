@@ -330,7 +330,7 @@ export default async function PropertyDetailPage({ params }: PropertyDetailPageP
             <div className="flex items-center gap-2 mb-4">
               <Bot className="w-5 h-5 text-blue-600" />
               <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                REKSA AI Due Diligence Checklist for this Property
+                A&E AI Due Diligence Checklist for this Property
               </h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">

@@ -90,7 +90,7 @@ export function analyseProperty(property: PropertyDataInput): PropertyAnalystOut
   riskSignals.push('Service charges, utility metering, and historical occupancy rates must be independently verified with building management.');
 
   assumptions.push('Rental yield projections assume continuous tenancy with an average 10% vacancy allowance.');
-  assumptions.push('Local submarket median prices are derived from active and historical REKSA platform listings.');
+  assumptions.push('Local submarket median prices are derived from active and historical A&E platform listings.');
 
   return {
     score: overallOpportunityScore,
@@ -106,12 +106,12 @@ export function analyseProperty(property: PropertyDataInput): PropertyAnalystOut
       priceVariance < 0 ? 'competitively below' : 'in line with'
     } observed asking prices in ${property.neighbourhood?.name || 'its area'}. Rental potential appears attractive at an estimated ${yieldEst.toFixed(
       1
-    )}% yield, with a REKSA Trust Score of ${property.trustScore}/100.`,
+    )}% yield, with an A&E Trust Score of ${property.trustScore}/100.`,
     positiveFactors,
     riskSignals,
     assumptions,
     dataSources: [
-      'REKSA Platform Transaction Index',
+      'A&E Platform Transaction Index',
       'Area Master Plan Spatial Data',
       property.verificationLevel >= 4 ? 'Licensed Structural Engineering Inspection Audit' : 'Platform Algorithmic Verification'
     ],

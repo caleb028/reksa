@@ -28,7 +28,7 @@ export function AIInsightCard({ analysis }: AIInsightCardProps) {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">REKSA AI Property Analyst</h3>
+              <h3 className="text-base font-extrabold text-slate-900 dark:text-white">A&E AI Property Analyst</h3>
               <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
                 {analysis.confidence} Confidence
               </span>

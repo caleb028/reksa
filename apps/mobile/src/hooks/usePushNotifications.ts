@@ -40,7 +40,7 @@ async function registerForPushNotificationsAsync(): Promise<string | undefined> 
 
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('default', {
-      name: 'REKSA Alerts',
+      name: 'A&E Alerts',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
       lightColor: '#0B3D2E',

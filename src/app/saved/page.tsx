@@ -174,7 +174,7 @@ export default function SavedPropertiesPage() {
               </div>
 
               <div className="rounded-2xl border border-slate-200/70 bg-slate-50/70 p-3.5 dark:border-slate-800 dark:bg-slate-850">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">Avg. REKSA Trust Score</span>
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Avg. A&E Trust Score</span>
                 <span className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5 block">
                   {stats.avgTrust}/100
                 </span>

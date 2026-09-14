@@ -21,7 +21,7 @@ const config: Config = {
           600: '#2b6e5b',
           700: '#225749',
           800: '#1b453b',
-          900: '#0B3D2E', // REKSA Deep Forest Green
+          900: '#0B3D2E', // A&E Deep Forest Green
           950: '#05241b',
         },
         ochre: {
@@ -30,7 +30,7 @@ const config: Config = {
           200: '#f5e7cc',
           300: '#edd4a7',
           400: '#e4bd7d',
-          500: '#D4A24C', // REKSA Warm Gold / Ochre
+          500: '#D4A24C', // A&E Warm Gold / Ochre
           600: '#bf8b3b',
           700: '#9f6e2e',
           800: '#7f5427',
@@ -39,7 +39,7 @@ const config: Config = {
         },
         canvas: {
           50: '#ffffff',
-          100: '#FAF8F4', // REKSA Warm Off-White
+          100: '#FAF8F4', // A&E Warm Off-White
           200: '#f4efe6',
           300: '#ebe2d4',
           400: '#ded1be',
@@ -55,7 +55,7 @@ const config: Config = {
           600: '#3f5049',
           700: '#313f39',
           800: '#222d28',
-          900: '#14231C', // REKSA Charcoal Dark Base
+          900: '#14231C', // A&E Charcoal Dark Base
           950: '#0a120e',
         },
         emerald: {

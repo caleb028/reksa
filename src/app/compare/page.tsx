@@ -81,7 +81,7 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
         <div className="flex items-center gap-2 mb-4">
           <Bot className="w-5 h-5 text-blue-600" />
           <h2 className="text-base font-extrabold text-slate-900 dark:text-white">
-            REKSA AI Comparative Verdicts &amp; Recommendations
+            A&E AI Comparative Verdicts &amp; Recommendations
           </h2>
         </div>
 
@@ -242,9 +242,9 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
               ))}
             </tr>
 
-            {/* REKSA Trust Score */}
+            {/* A&E Trust Score */}
             <tr>
-              <td className="p-4 font-bold text-slate-500">REKSA Trust Score</td>
+              <td className="p-4 font-bold text-slate-500">A&E Trust Score</td>
               {properties.map((p) => (
                 <td key={p.id} className="p-4">
                   <TrustScore score={p.trustScore} size="sm" />

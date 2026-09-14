@@ -1,7 +1,7 @@
 {
-  "name": "@reksa/mobile",
+  "name": "@ae/mobile",
   "version": "1.0.0",
-  "description": "REKSA — Real Estate Kenya Official Cross-Platform Mobile App (React Native & Expo)",
+  "description": "A&E — Ardhi and Estates Kenya Official Cross-Platform Mobile App (React Native & Expo)",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",

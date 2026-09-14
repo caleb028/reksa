@@ -439,7 +439,7 @@ export default function AffordabilityPage() {
                 </div>
 
                 <div className="rounded-xl bg-slate-50 p-3 text-[11px] text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
-                  By submitting, you consent to REKSA sharing your preliminary pre-qualification profile with {activeLender.name} under the Kenya Data Protection Act, 2019.
+                  By submitting, you consent to A&E (Ardhi and Estates) sharing your preliminary pre-qualification profile with {activeLender.name} under the Kenya Data Protection Act, 2019.
                 </div>
 
                 <button

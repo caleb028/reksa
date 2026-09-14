@@ -14,7 +14,7 @@ export default function AIAdvisorPage() {
     {
       role: 'assistant',
       content:
-        'Jambo! I am **REKSA AI**, Kenya’s dedicated Real Estate Search & Analysis Assistant. I have live access to verified property passports, submarket median asking prices, developer progress audits, and due diligence benchmarks across all 47 counties.\n\nHow can I help you find, verify, or evaluate an investment today?'
+        'Jambo! I am **A&E AI**, Kenya’s dedicated Real Estate Intelligence Assistant from **Ardhi and Estates**. I have live access to verified property passports, submarket median asking prices, developer progress audits, and due diligence benchmarks across all 47 counties.\n\nHow can I help you find, verify, or evaluate an investment today?'
     }
   ]);
   const [input, setInput] = useState('');
@@ -68,10 +68,10 @@ export default function AIAdvisorPage() {
           <span>Autonomous Real Estate Intelligence</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-          REKSA AI Real Estate Advisor
+          A&E AI Real Estate Advisor
         </h1>
         <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-          Powered by verified Kenyan PropTech datasets, spatial indexes, and statutory title compliance frameworks.
+          Powered by verified Kenyan PropTech datasets, spatial indexes, and statutory title compliance frameworks by Ardhi and Estates.
         </p>
       </div>
 
@@ -79,7 +79,7 @@ export default function AIAdvisorPage() {
       <div className="mb-5 rounded-2xl border border-amber-200 bg-amber-50/80 p-3.5 text-xs text-amber-900 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-200 flex items-start gap-2.5">
         <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
         <div className="leading-relaxed">
-          <span className="font-bold">Statutory Compliance Notice:</span> REKSA AI provides market intelligence and structured data analysis only. In accordance with the Advocates Act and Land Registration Act (2012), it does NOT provide formal legal counsel or statutory title guarantees. For transactional conveyancing, always consult a licensed advocate.
+          <span className="font-bold">Statutory Compliance Notice:</span> A&E AI provides market intelligence and structured data analysis only. In accordance with the Advocates Act and Land Registration Act (2012), it does NOT provide formal legal counsel or statutory title guarantees. For transactional conveyancing, always consult a licensed advocate.
         </div>
       </div>
 
@@ -120,7 +120,7 @@ export default function AIAdvisorPage() {
             <div className="flex justify-start">
               <div className="flex items-center gap-2 rounded-2xl bg-slate-100 px-4 py-3 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
                 <RefreshCw className="h-4 w-4 animate-spin text-[#c59228]" />
-                <span>REKSA AI is searching verified property records &amp; executing analytics...</span>
+                <span>A&E AI is searching verified property records &amp; executing analytics...</span>
               </div>
             </div>
           )}

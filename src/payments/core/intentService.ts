@@ -20,12 +20,12 @@ export interface CreateIntentInput {
 export class PaymentIntentService {
   /**
    * Generates a unique, commercial public payment reference
-   * e.g. REKSA-PAY-2026-94812
+   * e.g. AE-PAY-2026-94812
    */
   public static generatePublicReference(): string {
     const year = new Date().getFullYear();
     const rand = Math.floor(10000 + Math.random() * 90000);
-    return `REKSA-PAY-${year}-${rand}`;
+    return `AE-PAY-${year}-${rand}`;
   }
 
   /**

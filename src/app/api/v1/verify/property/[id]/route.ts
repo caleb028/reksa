@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 const VALID_B2B_PARTNERS: Record<string, { partnerName: string; tier: string; rateLimitPerMin: number }> = {
-  'reksa_vaas_kcb_bank_prod': { partnerName: 'KCB Bank Kenya Mortgages Division', tier: 'ENTERPRISE_BANK', rateLimitPerMin: 120 },
-  'reksa_vaas_ncba_prod': { partnerName: 'NCBA Bank Kenya Property Financing', tier: 'ENTERPRISE_BANK', rateLimitPerMin: 120 },
-  'reksa_vaas_stanbic_prod': { partnerName: 'Stanbic Bank Kenya Real Estate Finance', tier: 'ENTERPRISE_BANK', rateLimitPerMin: 120 },
-  'reksa_vaas_stima_sacco_prod': { partnerName: 'Stima SACCO Asset Financing', tier: 'ENTERPRISE_SACCO', rateLimitPerMin: 60 },
+  'ae_vaas_kcb_bank_prod': { partnerName: 'KCB Bank Kenya Mortgages Division', tier: 'ENTERPRISE_BANK', rateLimitPerMin: 120 },
+  'ae_vaas_ncba_prod': { partnerName: 'NCBA Bank Kenya Property Financing', tier: 'ENTERPRISE_BANK', rateLimitPerMin: 120 },
+  'ae_vaas_stanbic_prod': { partnerName: 'Stanbic Bank Kenya Real Estate Finance', tier: 'ENTERPRISE_BANK', rateLimitPerMin: 120 },
+  'ae_vaas_stima_sacco_prod': { partnerName: 'Stima SACCO Asset Financing', tier: 'ENTERPRISE_SACCO', rateLimitPerMin: 60 },
+  'ae_vaas_demo_partner': { partnerName: 'Institutional Developer / Partner Demo', tier: 'DEVELOPER_SANDBOX', rateLimitPerMin: 30 },
   'reksa_vaas_demo_partner': { partnerName: 'Institutional Developer / Partner Demo', tier: 'DEVELOPER_SANDBOX', rateLimitPerMin: 30 }
 };
 
@@ -20,8 +21,8 @@ export async function GET(
       return NextResponse.json(
         {
           error: 'Unauthorized: Missing required x-api-key header or apiKey query parameter.',
-          documentation: 'https://reksa.co.ke/docs/api/v1/vaas',
-          statutoryAuthority: 'REKSA Institutional Verification-as-a-Service (VaaS)'
+          documentation: 'https://ardhiestates.co.ke/docs/api/v1/vaas',
+          statutoryAuthority: 'A&E Institutional Verification-as-a-Service (VaaS)'
         },
         { status: 401 }
       );
@@ -29,7 +30,7 @@ export async function GET(
 
     // Authenticate partner key or permit dev/sandbox fallback
     const partner = VALID_B2B_PARTNERS[apiKey] || {
-      partnerName: 'REKSA Institutional Partner (Verified API Key)',
+      partnerName: 'A&E Institutional Partner (Verified API Key)',
       tier: 'INSTITUTIONAL_PARTNER',
       rateLimitPerMin: 60
     };
@@ -83,7 +84,7 @@ export async function GET(
     if (!property) {
       return NextResponse.json(
         {
-          error: `Property with identifier '${queryIdentifier}' not found in REKSA verified registry.`,
+          error: `Property with identifier '${queryIdentifier}' not found in A&E verified registry.`,
           partner: partner.partnerName
         },
         { status: 404 }
@@ -104,7 +105,7 @@ export async function GET(
     // Formulate response with legal statutory disclaimers
     return NextResponse.json({
       success: true,
-      queryReference: `REKSA-VAAS-${Date.now()}-${property.passportId}`,
+      queryReference: `AE-VAAS-${Date.now()}-${property.passportId}`,
       queriedAt: new Date().toISOString(),
       partner: {
         name: partner.partnerName,
@@ -118,7 +119,7 @@ export async function GET(
           'Data Protection Act 2019 (No. 24 of 2019)'
         ],
         legalNotice:
-          'CRITICAL STATUTORY NOTICE: REKSA Verification-as-a-Service performs automated metadata checks, cadastral GPS polygon matching, physical valuer/surveyor report verification, and title document presence analysis. Under Section 24 of the Kenya Land Registration Act 2012, this report DOES NOT constitute a state guarantee of title or replace official Land Registry deed searches conducted on Ardhisasa. Institutional lenders and conveyancing advocates must conduct statutory registry searches before loan disbursement.'
+          'CRITICAL STATUTORY NOTICE: A&E Verification-as-a-Service performs automated metadata checks, cadastral GPS polygon matching, physical valuer/surveyor report verification, and title document presence analysis. Under Section 24 of the Kenya Land Registration Act 2012, this report DOES NOT constitute a state guarantee of title or replace official Land Registry deed searches conducted on Ardhisasa. Institutional lenders and conveyancing advocates must conduct statutory registry searches before loan disbursement.'
       },
       propertySnapshot: {
         id: property.id,

@@ -66,7 +66,7 @@ export class MpesaStkPushService {
       PartyB: config.shortCode,
       PhoneNumber: normalizedPhone,
       CallBackURL: config.callbackUrl,
-      AccountReference: (req.accountReference || 'REKSA').substring(0, 12).replace(/[^a-zA-Z0-9]/g, ''),
+      AccountReference: (req.accountReference || 'ARDHI').substring(0, 12).replace(/[^a-zA-Z0-9]/g, ''),
       TransactionDesc: (req.transactionDesc || 'Listing Fee').substring(0, 13)
     };
 

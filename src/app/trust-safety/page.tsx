@@ -15,16 +15,16 @@ export default function TrustSafetyPage() {
           Trust, Verification &amp; Risk Signals
         </h1>
         <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-          Transparency is the foundation of REKSA (Real Estate Kenya Search & Analysis). Here is how our verification tiers, AI risk signals, and professional audits operate.
+          Transparency is the foundation of A&E (Ardhi and Estates). Here is how our verification tiers, AI risk signals, and professional audits operate.
         </p>
       </div>
 
-      {/* 1. What REKSA Verifies vs Does NOT Verify */}
+      {/* 1. What A&E Verifies vs Does NOT Verify */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div className="rounded-3xl border border-emerald-500/30 bg-white p-6 sm:p-8 dark:border-emerald-500/20 dark:bg-slate-900 shadow-card">
           <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-extrabold text-base mb-4">
             <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-            <span>What REKSA Verifies</span>
+            <span>What A&E Verifies</span>
           </div>
           <ul className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
             <li className="flex items-start gap-2">
@@ -49,12 +49,12 @@ export default function TrustSafetyPage() {
         <div className="rounded-3xl border border-red-500/30 bg-white p-6 sm:p-8 dark:border-red-500/20 dark:bg-slate-900 shadow-card">
           <div className="flex items-center gap-2 text-red-700 dark:text-red-400 font-extrabold text-base mb-4">
             <XCircle className="w-5 h-5 text-red-600" />
-            <span>What REKSA Does NOT Certify</span>
+            <span>What A&E Does NOT Certify</span>
           </div>
           <ul className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
             <li className="flex items-start gap-2">
               <span className="text-red-500 font-bold">✗</span>
-              <span><strong>Official Government Legal Title:</strong> REKSA is NOT a government land registry. Only the Ministry of Lands &amp; Physical Planning (via ArdhiSasa) can issue official certificates of search.</span>
+              <span><strong>Official Government Legal Title:</strong> A&E is NOT a government land registry. Only the Ministry of Lands &amp; Physical Planning (via ArdhiSasa) can issue official certificates of search.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-red-500 font-bold">✗</span>
@@ -100,7 +100,7 @@ export default function TrustSafetyPage() {
           How AI Risk Signals Work
         </h2>
         <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-          REKSA runs continuous background algorithms screening every listing for anomalies: duplicate photographs, sudden price drops (&gt;40% below submarket median), conflicting title parcel numbers, and unverified broker credentials. Listings with high risk signals are placed on hold for human moderator review.
+          A&E runs continuous background algorithms screening every listing for anomalies: duplicate photographs, sudden price drops (&gt;40% below submarket median), conflicting title parcel numbers, and unverified broker credentials. Listings with high risk signals are placed on hold for human moderator review.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs text-center">
           <div className="rounded-2xl bg-emerald-50 p-4 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">

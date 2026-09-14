@@ -98,7 +98,7 @@ export default async function CompanyDiscoveryPage({ searchParams }: CompanyDisc
                 <Building2 className="h-4 w-4" />
               </span>
               <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                REKSA Stores &amp; Agencies Directory
+                A&E Stores &amp; Agencies Directory
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
@@ -242,7 +242,7 @@ export default async function CompanyDiscoveryPage({ searchParams }: CompanyDisc
                     href={`/companies/${co.slug}`}
                     className="flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 py-2.5 text-xs font-bold text-white group-hover:bg-emerald-700 transition-colors dark:bg-slate-800 dark:group-hover:bg-emerald-700 shadow-xs"
                   >
-                    <span>Visit REKSA Store</span>
+                    <span>Visit A&E Store</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

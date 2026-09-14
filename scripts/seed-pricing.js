@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function seedPricing() {
-  console.log('Seeding REKSA Pricing Rules, Volume Discounts, and Promotion Plans...');
+  console.log('Seeding A&E Pricing Rules, Volume Discounts, and Promotion Plans...');
 
   // 1. Volume Discounts
   const volumeTiers = [
@@ -23,7 +23,7 @@ async function seedPricing() {
   const promotions = [
     { code: 'FEATURED_LISTING', name: 'Featured Placement', description: 'Top ranking and gold badge in search listings for 14 days', durationDays: 14, priceKes: 500 },
     { code: 'SEARCH_BOOST', name: 'Search Algorithm Boost', description: 'Priority visibility in keyword and spatial filter results for 7 days', durationDays: 7, priceKes: 350 },
-    { code: 'HOMEPAGE_SPOTLIGHT', name: 'Homepage Flagship Spotlight', description: 'Hero carousel and verified spotlight banner on REKSA homepage for 7 days', durationDays: 7, priceKes: 1200 },
+    { code: 'HOMEPAGE_SPOTLIGHT', name: 'Homepage Flagship Spotlight', description: 'Hero carousel and verified spotlight banner on A&E homepage for 7 days', durationDays: 7, priceKes: 1200 },
     { code: 'COUNTY_SPOTLIGHT', name: 'County Regional Spotlight', description: 'Prominent header placement in county-specific landing pages for 14 days', durationDays: 14, priceKes: 800 },
   ];
 
@@ -65,7 +65,7 @@ async function seedPricing() {
     }
   }
 
-  console.log('REKSA Pricing Rules seeded successfully.');
+  console.log('A&E Pricing Rules seeded successfully.');
 }
 
 seedPricing()

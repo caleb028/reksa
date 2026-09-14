@@ -37,7 +37,7 @@ const SLIDES: Slide[] = [
     description: 'Explore verified apartments, residences and commercial investments across all 47 counties with digital property passports and transparent land data.',
     primaryCtaText: 'Explore Apartments for Sale',
     primaryCtaHref: '/apartments-for-sale',
-    secondaryCtaText: 'Ask REKSA AI Advisor',
+    secondaryCtaText: 'Ask A&E AI Advisor',
     secondaryCtaHref: '/ai-advisor'
   },
   {

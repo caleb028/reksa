@@ -53,7 +53,7 @@ export function InvestmentIntelligenceCard({
               Investment Intelligence &amp; Capital Projections
             </h3>
             <span className="text-xs text-slate-500">
-              REKSA valuation indicators for {estate || town}
+              A&E valuation indicators for {estate || town}
             </span>
           </div>
         </div>
@@ -144,7 +144,7 @@ export function InvestmentIntelligenceCard({
       <div className="text-[11px] text-slate-400 dark:text-slate-500 flex items-start gap-2">
         <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5 text-slate-400" />
         <span>
-          REKSA investment projections represent informational analysis derived from observed asking prices and verified historical leases. They do not constitute formal financial, legal, or licensed appraisal advice.
+          A&E investment projections represent informational analysis derived from observed asking prices and verified historical leases. They do not constitute formal financial, legal, or licensed appraisal advice.
         </span>
       </div>
     </div>

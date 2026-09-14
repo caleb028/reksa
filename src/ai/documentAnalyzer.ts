@@ -58,6 +58,6 @@ export function analyzePropertyDocument(input: DocumentScanInput): DocumentAnaly
     itemsRequiringReview,
     professionalReviewRecommended: true,
     legalValidityDisclaimer:
-      'The document contains information that appears internally consistent based on automated analysis, but authenticity and legal validity require appropriate professional/official verification. REKSA Kenya does not certify official government records.'
+      'The document contains information that appears internally consistent based on automated analysis, but authenticity and legal validity require appropriate professional/official verification. A&E (Ardhi and Estates) does not certify official government records.'
   };
 }

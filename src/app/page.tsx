@@ -322,17 +322,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 9. HOW REKSA WORKS: DATA -> VERIFICATION -> INTELLIGENCE -> DECISION */}
+      {/* 9. HOW A&E WORKS: DATA -> VERIFICATION -> INTELLIGENCE -> DECISION */}
       <section className="bg-slate-950 text-white py-16 border-y border-slate-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#c59228] block mb-2">
-            The REKSA Operating Standard
+            The A&E Operating Standard
           </span>
           <h2 className="text-3xl font-black text-white tracking-tight">
-            How REKSA Works
+            How A&E (Ardhi &amp; Estates) Works
           </h2>
           <p className="mt-2 text-sm text-slate-300 max-w-xl mx-auto">
-            A standard property portal answers &quot;What is available?&quot; REKSA answers &quot;Is it trustworthy, what is it worth, and should you invest?&quot;
+            A standard property portal answers &quot;What is available?&quot; A&E answers &quot;Is it trustworthy, what is it worth, and should you invest?&quot;
           </p>
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
@@ -377,7 +377,7 @@ export default async function HomePage() {
           <div className="relative z-10 max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/20 px-3.5 py-1 text-xs font-bold text-blue-300 mb-4">
               <Bot className="w-4 h-4 text-[#c59228]" />
-              <span>REKSA Conversational Real Estate Intelligence</span>
+              <span>A&E Conversational Real Estate Intelligence</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight">
@@ -385,7 +385,7 @@ export default async function HomePage() {
             </h2>
 
             <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-              Ask REKSA AI to calculate rental yields, check verification tiers, compare prices per square metre, or generate due diligence checklists.
+              Ask A&E AI to calculate rental yields, check verification tiers, compare prices per square metre, or generate due diligence checklists.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -393,7 +393,7 @@ export default async function HomePage() {
                 href="/ai-advisor"
                 className="rounded-2xl bg-[#0a3871] hover:bg-[#0c4387] px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-lg transition-colors border border-blue-400/30"
               >
-                Chat with REKSA AI Advisor
+                Chat with A&E AI Advisor
               </Link>
               <Link
                 href="/tools/investment"

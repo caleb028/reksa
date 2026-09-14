@@ -1,6 +1,6 @@
-# REKSA Mobile — React Native / Expo Architecture
+# A&E Mobile — Ardhi and Estates
 
-This package contains the official cross-platform mobile application for **REKSA — Real Estate Kenya Search & Analysis**.
+This package contains the official cross-platform mobile application for **A&E — Ardhi and Estates (Kenya)**.
 
 ---
 
@@ -17,7 +17,7 @@ This package contains the official cross-platform mobile application for **REKSA
 
 ```
 apps/mobile/
-├── app.json                     # Expo configuration (bundle: ke.co.reksa.mobile)
+├── app.json                     # Expo configuration (bundle: ke.co.ardhiestates.mobile)
 ├── package.json                 # Dependencies
 ├── src/
 │   ├── navigation/

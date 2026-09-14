@@ -16,7 +16,7 @@ export interface AdvisorResponse {
   legalGateUrl?: string;
 }
 
-export async function askReksaAI(query: string, history: AdvisorMessage[] = []): Promise<AdvisorResponse> {
+export async function askAeAI(query: string, history: AdvisorMessage[] = []): Promise<AdvisorResponse> {
   const q = query.toLowerCase().trim();
 
   // Natural language intent parsing
@@ -72,7 +72,7 @@ export async function askReksaAI(query: string, history: AdvisorMessage[] = []):
         suggestedPrompts: [
           'Show properties in Kiambu under KSh 12M',
           'What is the median price in Kileleshwa?',
-          'How does REKSA verify listings?'
+          'How does A&E verify listings?'
         ],
         toolInvoked: 'searchProperties',
         confidence: 'High'
@@ -97,7 +97,7 @@ export async function askReksaAI(query: string, history: AdvisorMessage[] = []):
   // 3. Verification & Due Diligence Checklist
   if (q.includes('check') || q.includes('due diligence') || q.includes('scam') || q.includes('safe') || q.includes('fraud') || q.includes('verify')) {
     return {
-      message: `**REKSA Due Diligence Protocol for Kenyan Real Estate:**\n\n1. **Official Registry Search (ArdhiSasa / Lands Ministry):** Never rely solely on paper copies. Conduct an official land search to confirm registered proprietor, encumbrances, and caveats.\n2. **Sectional Properties Act 2020 Compliance:** For apartments, verify whether the developer has converted the mother title into individual sectional unit titles.\n3. **Survey Beacon Confirmation:** For land, engage a licensed surveyor to ground-truth beacon pins against the official Registry Index Map (RIM).\n4. **County Rates & Land Rent Clearance:** Request valid clearance certificates from the respective County government.\n5. **Independent Inspection:** Book an ISK/EBK certified inspector on REKSA to audit structural, MEP, and plumbing health.\n\n*REKSA never issues legal certifications; our platform highlights automated data signals to guide your professional review.*`,
+      message: `**A&E Due Diligence Protocol for Kenyan Real Estate:**\n\n1. **Official Registry Search (ArdhiSasa / Lands Ministry):** Never rely solely on paper copies. Conduct an official land search to confirm registered proprietor, encumbrances, and caveats.\n2. **Sectional Properties Act 2020 Compliance:** For apartments, verify whether the developer has converted the mother title into individual sectional unit titles.\n3. **Survey Beacon Confirmation:** For land, engage a licensed surveyor to ground-truth beacon pins against the official Registry Index Map (RIM).\n4. **County Rates & Land Rent Clearance:** Request valid clearance certificates from the respective County government.\n5. **Independent Inspection:** Book an ISK/EBK certified inspector on A&E to audit structural, MEP, and plumbing health.\n\n*A&E never issues legal certifications; our platform highlights automated data signals to guide your professional review.*`,
       suggestedPrompts: [
         'Review my title deed document',
         'Book a licensed property inspector',
@@ -131,15 +131,16 @@ export async function askReksaAI(query: string, history: AdvisorMessage[] = []):
 
   // 5. Default intelligent advisor response
   return {
-    message: `Hello! I am **REKSA AI**, your digital real estate advisor for the Kenyan property market. I have real-time access to REKSA verified property passports, neighbourhood price trends, developer track records, and risk signals across all 47 counties.\n\nHow can I assist your property decision today?`,
+    message: `Hello! I am **A&E AI**, your digital real estate advisor for the Kenyan property market from **Ardhi and Estates**. I have real-time access to A&E verified property passports, neighbourhood price trends, developer track records, and risk signals across all 47 counties.\n\nHow can I assist your property decision today?`,
     suggestedPrompts: [
       'Find me a 2-bedroom apartment in Kileleshwa under KSh 10 million',
       'Which areas around Nairobi offer the highest rental yields?',
       'What should I inspect before buying land in Ruiru or Kitengela?',
-      'Explain how the REKSA Trust Score is calculated'
+      'Explain how the A&E Trust Score is calculated'
     ],
     confidence: 'High'
   };
 }
 
-export const askMaliAI = askReksaAI;
+export const askReksaAI = askAeAI;
+export const askMaliAI = askAeAI;

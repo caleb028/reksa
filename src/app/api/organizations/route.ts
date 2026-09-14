@@ -148,9 +148,9 @@ export async function POST(req: NextRequest) {
     // Default badge based on business type
     let verificationBadge = 'IDENTITY VERIFIED';
     if (businessType === 'REAL_ESTATE_COMPANY') {
-      verificationBadge = 'REKSA VERIFIED COMPANY';
+      verificationBadge = 'A&E VERIFIED COMPANY';
     } else if (businessType === 'DEVELOPER') {
-      verificationBadge = 'REKSA VERIFIED DEVELOPER';
+      verificationBadge = 'A&E VERIFIED DEVELOPER';
     }
 
     const organization = await db.organization.create({

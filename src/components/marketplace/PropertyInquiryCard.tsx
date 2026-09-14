@@ -124,7 +124,7 @@ export function PropertyInquiryCard({
           </div>
           <div>
             <h5 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-              <span>{agent?.name || 'Verified REKSA Realtor'}</span>
+              <span>{agent?.name || 'Verified A&E Realtor'}</span>
               <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
             </h5>
             <span className="text-xs text-slate-500 block">
@@ -337,7 +337,7 @@ export function PropertyInquiryCard({
                   className="mt-0.5 rounded border-slate-300 text-forest-900 focus:ring-forest-700"
                 />
                 <span className="leading-tight">
-                  <strong className="text-slate-900 dark:text-white">Data Protection Act (2019) Consent:</strong> I authorize REKSA to securely route my contact info to the verified lister solely for this inquiry. Phone numbers are masked until accepted.
+                  <strong className="text-slate-900 dark:text-white">Data Protection Act (2019) Consent:</strong> I authorize A&amp;E to securely route my contact info to the verified lister solely for this inquiry. Phone numbers are masked until accepted.
                 </span>
               </label>
             </div>

@@ -70,8 +70,8 @@ export const DEMO_WORKSPACES: WorkspaceItem[] = [
     badge: 'Private Seller'
   },
   {
-    id: 'reksa_platform_admin',
-    name: 'REKSA Platform Console',
+    id: 'ae_platform_admin',
+    name: 'A&E Platform Console',
     type: 'ADMIN',
     role: 'Super Administrator',
     badge: 'Admin'

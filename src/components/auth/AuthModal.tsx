@@ -136,13 +136,17 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'SIGN_IN' }: AuthModal
           <X className="w-5 h-5" />
         </button>
 
-        {/* Brand Header */}
         <div className="flex items-center gap-2 mb-4">
-          <img src="/images/reksa-cube.png" alt="REKSA" className="h-7 w-auto object-contain" />
-          <span className="text-lg font-black tracking-tight text-[#0a3871] dark:text-white">
-            REKSA
-          </span>
-          <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+          <img src="/images/reksa-cube.png" alt="A&E" className="h-7 w-auto object-contain" />
+          <div className="flex flex-col">
+            <span className="text-lg font-black tracking-tight text-[#0a3871] dark:text-white leading-none">
+              A&amp;E
+            </span>
+            <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+              Ardhi &amp; Estates
+            </span>
+          </div>
+          <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 ml-auto">
             Secure Auth
           </span>
         </div>
@@ -243,7 +247,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'SIGN_IN' }: AuthModal
                 <span>Signing In...</span>
               ) : (
                 <>
-                  <span>Sign In to REKSA</span>
+                  <span>Sign In to A&amp;E</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </>
               )}

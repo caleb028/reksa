@@ -37,7 +37,7 @@ export default async function ProfessionalsPage() {
           <Lock className="w-4 h-4 text-forest-700 dark:text-forest-400 shrink-0" />
           <div>
             <span className="font-bold text-forest-950 dark:text-forest-200">
-              REKSA Escrow Protected Transaction:
+              A&E Escrow Protected Transaction:
             </span>{' '}
             <span className="text-forest-900/90 dark:text-forest-300">
               Professional fees are held securely and disbursed only when verified valuation reports or registered sale agreements are delivered.
@@ -123,7 +123,7 @@ export default async function ProfessionalsPage() {
                 Verified Board: <strong>{p.boardRegNumber}</strong>
               </span>
               <a
-                href={`https://wa.me/254722000000?text=${encodeURIComponent(`Hello, I would like to book a professional service with ${p.user.name} on REKSA.`)}`}
+                href={`https://wa.me/254722000000?text=${encodeURIComponent(`Hello, I would like to book a professional service with ${p.user.name} on A&E (Ardhi and Estates).`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 rounded-xl bg-forest-900 px-4 py-2 text-xs font-bold text-white hover:bg-forest-800 transition-colors shadow-xs"

@@ -199,7 +199,7 @@ export default function MarketReportsPage() {
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3">
                 <BarChart3 className="w-3.5 h-3.5" />
-                <span>REKSA Institutional Intelligence Division</span>
+                <span>A&E Institutional Intelligence Division</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                 Kenya Property Market Reports &amp; Submarket Benchmarks
@@ -393,7 +393,7 @@ export default function MarketReportsPage() {
               <span>Quarterly Market Research Publications</span>
             </h2>
             <p className="text-xs text-slate-500">
-              In-depth macroeconomic and submarket briefings prepared by REKSA research analysts for institutional funds, developers, and commercial lenders.
+              In-depth macroeconomic and submarket briefings prepared by A&E research analysts for institutional funds, developers, and commercial lenders.
             </p>
           </div>
 
@@ -429,7 +429,7 @@ export default function MarketReportsPage() {
                 <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Certified REKSA Data</span>
+                    <span>Certified A&E Data</span>
                   </div>
                   <button
                     onClick={() => handleDownload(rep)}
@@ -449,7 +449,7 @@ export default function MarketReportsPage() {
         <section className="rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-forest-950 via-forest-900 to-slate-950 text-white p-8 shadow-xl">
           <div className="max-w-3xl">
             <span className="text-gold-400 text-xs font-mono font-bold uppercase tracking-wider block mb-1">
-              REKSA Verification-as-a-Service (VaaS) API
+              A&E Verification-as-a-Service (VaaS) API
             </span>
             <h3 className="text-2xl font-black tracking-tight text-white">
               Direct Cadastral &amp; Title Verification for Banks &amp; SACCOs
@@ -460,7 +460,7 @@ export default function MarketReportsPage() {
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link
-                href="/api/v1/verify/property/MLT-NBI-008421?apiKey=reksa_vaas_demo_partner"
+                href="/api/v1/verify/property/MLT-NBI-008421?apiKey=ae_vaas_demo_partner"
                 target="_blank"
                 className="inline-flex items-center gap-1.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-slate-950 px-4 py-2 text-xs font-bold shadow-md transition-colors"
               >

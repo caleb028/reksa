@@ -173,7 +173,7 @@ export function PropertyMap({ properties, selectedCounty = 'All Kenya' }: Proper
 
             <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
               <div className="rounded-lg bg-slate-50 p-2.5 dark:bg-slate-800/50">
-                <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-bold">REKSA Trust Score</span>
+                <span className="text-slate-500 dark:text-slate-400 block text-[10px] uppercase font-bold">A&amp;E Trust Score</span>
                 <span className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">{activeProperty.trustScore} / 100</span>
               </div>
               <div className="rounded-lg bg-slate-50 p-2.5 dark:bg-slate-800/50">

@@ -1,7 +1,7 @@
 {
-  "name": "REKSA — Kenya's Intelligent Real Estate Marketplace",
-  "short_name": "REKSA",
-  "description": "Search, verify, analyse, discover, and invest in Kenya's verified real estate marketplace.",
+  "name": "A&E — Ardhi and Estates Kenya",
+  "short_name": "A&E",
+  "description": "Search, verify, analyse, discover, and invest in Kenya's verified real estate marketplace with Ardhi and Estates.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
