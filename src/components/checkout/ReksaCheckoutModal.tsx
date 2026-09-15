@@ -248,14 +248,15 @@ export function ReksaCheckoutModal({
         </button>
 
         {/* Modal Brand Header */}
-        <div className="flex items-center gap-2 mb-4">
-          <img src="/images/reksa-cube.png" alt="A&E" className="h-7 w-auto object-contain" />
+        <div className="flex items-center gap-3 mb-4">
+          <img src="/images/reksa-cube.png" alt="Ardhi & Estates" className="h-10 w-10 object-contain filter drop-shadow-xs" />
           <div className="flex flex-col">
-            <span className="text-lg font-black tracking-tight text-[#0a3871] dark:text-white leading-none">
-              A&amp;E PAY
+            <span className="text-lg font-black tracking-tight text-[#0B3D2E] dark:text-emerald-400 flex items-center gap-1.5 leading-none">
+              <span>Ardhi &amp; Estates</span>
+              <span className="text-xs font-black text-[#D4A24C] uppercase tracking-wider bg-amber-50 dark:bg-amber-950/60 px-1.5 py-0.5 rounded-md border border-amber-200 dark:border-amber-800">PAY</span>
             </span>
-            <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
-              Ardhi &amp; Estates
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-0.5">
+              Official Safaricom M-Pesa Checkout
             </span>
           </div>
           <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 ml-auto">

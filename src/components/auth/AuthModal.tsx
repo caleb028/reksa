@@ -136,14 +136,16 @@ export function AuthModal({ isOpen, onClose, defaultTab = 'SIGN_IN' }: AuthModal
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2 mb-4">
-          <img src="/images/reksa-cube.png" alt="A&E" className="h-7 w-auto object-contain" />
+        <div className="flex items-center gap-3 mb-4">
+          <img src="/images/reksa-cube.png" alt="Ardhi & Estates" className="h-10 w-10 object-contain filter drop-shadow-xs" />
           <div className="flex flex-col">
-            <span className="text-lg font-black tracking-tight text-[#0a3871] dark:text-white leading-none">
-              A&amp;E
+            <span className="text-lg font-black tracking-tight text-[#0B3D2E] dark:text-emerald-400 flex items-center gap-1 leading-none">
+              <span>Ardhi</span>
+              <span className="text-[#D4A24C] font-serif font-black">&amp;</span>
+              <span>Estates</span>
             </span>
-            <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400">
-              Ardhi &amp; Estates
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mt-0.5">
+              Account Security Portal
             </span>
           </div>
           <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 ml-auto">

@@ -71,14 +71,16 @@ export function PaymentReceiptModal({ isOpen, onClose, receipt }: PaymentReceipt
           {/* Header */}
           <div className="flex items-start justify-between">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <img src="/images/reksa-cube.png" alt="A&E" className="h-8 w-auto object-contain" />
+              <div className="flex items-center gap-3 mb-1.5">
+                <img src="/images/reksa-cube.png" alt="Ardhi & Estates" className="h-11 w-11 object-contain filter drop-shadow-xs" />
                 <div className="flex flex-col">
-                  <span className="text-xl font-black tracking-tight text-[#0a3871] dark:text-white leading-none">
-                    A&amp;E
+                  <span className="text-xl font-black tracking-tight text-[#0B3D2E] dark:text-emerald-400 flex items-center gap-1 leading-none">
+                    <span>Ardhi</span>
+                    <span className="text-[#D4A24C] font-serif font-black">&amp;</span>
+                    <span>Estates</span>
                   </span>
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400">
-                    Ardhi and Estates
+                  <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-0.5">
+                    Official Transaction Tax Invoice
                   </span>
                 </div>
               </div>

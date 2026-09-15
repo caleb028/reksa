@@ -82,22 +82,23 @@ export function Navbar() {
       >
         <div
           className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
-            isScrolled ? 'h-14 sm:h-15' : 'h-16'
+            isScrolled ? 'h-16 sm:h-17' : 'h-18 sm:h-20'
           }`}
         >
           {/* Brand Identity */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
+          <Link href="/" className="flex items-center gap-3 sm:gap-4 group flex-shrink-0">
             <img
               src="/images/reksa-cube.png"
-              alt="A&E (Ardhi & Estates) Logo"
-              className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+              alt="Ardhi & Estates Logo"
+              className="h-11 sm:h-13 md:h-14 w-11 sm:w-13 md:w-14 object-contain transition-transform group-hover:scale-105 filter drop-shadow-xs"
             />
             <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0B3D2E] dark:text-white flex items-center gap-1.5">
-                <span>A&amp;E</span>
-                <span className="text-[11px] font-bold text-[#D4A24C] dark:text-amber-400 font-sans tracking-normal opacity-90 hidden sm:inline">(Ardhi &amp; Estates)</span>
+              <span className="text-xl sm:text-2xl md:text-[26px] font-black tracking-tight text-[#0B3D2E] dark:text-emerald-400 flex items-center gap-1.5 leading-none">
+                <span>Ardhi</span>
+                <span className="text-[#D4A24C] dark:text-amber-400 font-serif font-black">&amp;</span>
+                <span>Estates</span>
               </span>
-              <span className="hidden sm:block text-[8px] font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
+              <span className="hidden sm:block text-[9px] sm:text-[10px] font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase mt-1">
                 Kenya&apos;s Intelligent Real Estate Platform
               </span>
             </div>

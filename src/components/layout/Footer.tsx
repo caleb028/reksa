@@ -14,21 +14,25 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand & Mission */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2.5 mb-3">
+            <div className="flex items-center gap-3.5 mb-3.5">
               <img
                 src="/images/reksa-cube.png"
-                alt="A&E (Ardhi & Estates) Logo"
-                className="h-9 w-auto object-contain"
+                alt="Ardhi & Estates Logo"
+                className="h-12 w-12 sm:h-14 sm:w-14 object-contain filter drop-shadow-md"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-black text-white tracking-tight">A&amp;E</span>
-                <span className="text-[9px] font-bold text-[#c59228] tracking-wider uppercase">
-                  Ardhi &amp; Estates Kenya
+                <span className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-1.5 leading-none">
+                  <span>Ardhi</span>
+                  <span className="text-[#D4A24C] font-serif font-black">&amp;</span>
+                  <span>Estates</span>
+                </span>
+                <span className="text-[10px] font-bold text-[#c59228] tracking-wider uppercase mt-1">
+                  Kenya&apos;s Intelligent Real Estate Platform
                 </span>
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed mb-4">
-              A&amp;E (Ardhi and Estates) is Kenya&apos;s premier digital property intelligence, search and verification platform. Providing algorithmic yield modeling, transparent verification signals, and market analysis across all 47 counties.
+              Ardhi &amp; Estates is Kenya&apos;s premier digital property intelligence, search and verification platform. Providing algorithmic yield modeling, transparent verification signals, and market analysis across all 47 counties.
             </p>
             <div className="text-xs font-mono font-bold text-[#c59228]">
               SEARCH • VERIFY • ANALYSE • INVEST
