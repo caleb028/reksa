@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description:
     'A&E (Ardhi and Estates) — Kenya\'s premier property intelligence, search and verification platform. Verified Property Passports, algorithmic yield modeling, and transparent real estate analysis across Kenya.',
   icons: {
-    icon: '/favicon.png',
-    apple: '/images/reksa-cube.png'
+    icon: '/images/favicon-32.png',
+    apple: '/images/logo.png'
   },
   keywords: [
     'A&E',
