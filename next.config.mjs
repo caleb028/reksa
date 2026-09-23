@@ -2,6 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false, // Security: suppress X-Powered-By: Next.js
+  experimental: {
+    outputFileTracingIncludes: {
+      '/**': ['./prisma/dev.db', './prisma/**'],
+    },
+  },
   images: {
     remotePatterns: [
       {

@@ -27,13 +27,10 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# SQLite local databases
-*.db
+# SQLite temporary journal files
 *.db-journal
-*.sqlite
-*.sqlite3
-prisma/dev.db
-prisma/dev.db-journal
+*.sqlite-journal
+!prisma/dev.db
 
 # Operating System Files
 .DS_Store

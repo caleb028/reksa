@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { db } from '@/lib/db';
 import { KENYA_COUNTIES } from '@/lib/constants/kenya';
+import { FALLBACK_PROPERTIES } from '@/lib/fallbackData';
 import { HeroSlideshow } from '@/components/ui/HeroSlideshow';
 import { MegaSearch } from '@/components/search/MegaSearch';
 import { MarketplaceShowcase } from '@/components/marketplace/MarketplaceShowcase';
@@ -32,97 +33,130 @@ import { VerificationBadge } from '@/components/ui/VerificationBadge';
 import { AnimatedCounter } from '@/components/motion/MotionPrimitives';
 
 export default async function HomePage() {
-  // Query real database statistics
-  const [totalProperties, totalApartments, totalDevelopments, totalCounties] = await Promise.all([
-    db.property.count({ where: { status: 'ACTIVE' } }),
-    db.property.count({ where: { status: 'ACTIVE', propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] } } }),
-    db.development.count(),
-    db.county.count(),
-  ]);
+  let totalProperties = 10;
+  let totalApartments = 5;
+  let totalDevelopments = 1;
+  let totalCounties = 47;
+  let apartmentsForSale: any[] = [];
+  let apartmentsForRent: any[] = [];
+  let featuredVerified: any[] = [];
+  let developments: any[] = [];
+  let neighbourhoods: any[] = [];
+  let professionals: any[] = [];
 
-  // Query featured apartments for sale
-  const apartmentsForSale = await db.property.findMany({
-    where: {
-      status: 'ACTIVE',
-      listingIntent: 'SALE',
-      propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] }
-    },
-    take: 3,
-    include: {
-      county: true,
-      neighbourhood: true,
-      images: { take: 1, orderBy: { orderIndex: 'asc' } },
-      passport: true,
-      organization: { select: { name: true, slug: true } },
-      agent: { select: { name: true } },
-      assignedAgentMember: { include: { user: { select: { name: true } } } }
-    },
-    orderBy: { trustScore: 'desc' }
-  });
+  try {
+    const stats = await Promise.all([
+      db.property.count({ where: { status: 'ACTIVE' } }),
+      db.property.count({ where: { status: 'ACTIVE', propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] } } }),
+      db.development.count(),
+      db.county.count(),
+    ]);
+    totalProperties = stats[0];
+    totalApartments = stats[1];
+    totalDevelopments = stats[2];
+    totalCounties = stats[3];
 
-  // Query popular apartments for rent
-  const apartmentsForRent = await db.property.findMany({
-    where: {
-      status: 'ACTIVE',
-      listingIntent: 'RENT',
-      propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] }
-    },
-    take: 3,
-    include: {
-      county: true,
-      neighbourhood: true,
-      images: { take: 1, orderBy: { orderIndex: 'asc' } },
-      passport: true,
-      organization: { select: { name: true, slug: true } },
-      agent: { select: { name: true } },
-      assignedAgentMember: { include: { user: { select: { name: true } } } }
-    },
-    orderBy: { rentalYieldEstimate: 'desc' }
-  });
+    // Query featured apartments for sale
+    apartmentsForSale = await db.property.findMany({
+      where: {
+        status: 'ACTIVE',
+        listingIntent: 'SALE',
+        propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] }
+      },
+      take: 3,
+      include: {
+        county: true,
+        neighbourhood: true,
+        images: { take: 1, orderBy: { orderIndex: 'asc' } },
+        passport: true,
+        organization: { select: { name: true, slug: true } },
+        agent: { select: { name: true } },
+        assignedAgentMember: { include: { user: { select: { name: true } } } }
+      },
+      orderBy: { trustScore: 'desc' }
+    });
 
-  // Query top verified flagship properties
-  const featuredVerified = await db.property.findMany({
-    where: { status: 'ACTIVE', verificationLevel: { gte: 3 } },
-    take: 3,
-    include: {
-      county: true,
-      neighbourhood: true,
-      images: { take: 1, orderBy: { orderIndex: 'asc' } },
-      passport: true,
-      organization: { select: { name: true, slug: true } },
-      agent: { select: { name: true } },
-      assignedAgentMember: { include: { user: { select: { name: true } } } }
-    },
-    orderBy: { trustScore: 'desc' }
-  });
+    // Query popular apartments for rent
+    apartmentsForRent = await db.property.findMany({
+      where: {
+        status: 'ACTIVE',
+        listingIntent: 'RENT',
+        propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] }
+      },
+      take: 3,
+      include: {
+        county: true,
+        neighbourhood: true,
+        images: { take: 1, orderBy: { orderIndex: 'asc' } },
+        passport: true,
+        organization: { select: { name: true, slug: true } },
+        agent: { select: { name: true } },
+        assignedAgentMember: { include: { user: { select: { name: true } } } }
+      },
+      orderBy: { rentalYieldEstimate: 'desc' }
+    });
 
-  // Query developments
-  const developments = await db.development.findMany({
-    take: 2,
-    include: {
-      county: true,
-      neighbourhood: true,
-      progressUpdates: true,
-      units: true
-    }
-  });
+    // Query top verified flagship properties
+    featuredVerified = await db.property.findMany({
+      where: { status: 'ACTIVE', verificationLevel: { gte: 3 } },
+      take: 3,
+      include: {
+        county: true,
+        neighbourhood: true,
+        images: { take: 1, orderBy: { orderIndex: 'asc' } },
+        passport: true,
+        organization: { select: { name: true, slug: true } },
+        agent: { select: { name: true } },
+        assignedAgentMember: { include: { user: { select: { name: true } } } }
+      },
+      orderBy: { trustScore: 'desc' }
+    });
 
-  // Query popular neighbourhoods
-  const neighbourhoods = await db.neighbourhood.findMany({
-    take: 4,
-    include: {
-      county: true
-    }
-  });
+    // Query developments
+    developments = await db.development.findMany({
+      take: 2,
+      include: {
+        county: true,
+        neighbourhood: true,
+        progressUpdates: true,
+        units: true
+      }
+    });
 
-  // Query verified professionals
-  const professionals = await db.professional.findMany({
-    take: 3,
-    include: {
-      user: true,
-      services: true
-    }
-  });
+    // Query popular neighbourhoods
+    neighbourhoods = await db.neighbourhood.findMany({
+      take: 4,
+      include: {
+        county: true
+      }
+    });
+
+    // Query verified professionals
+    professionals = await db.professional.findMany({
+      take: 3,
+      include: {
+        user: true,
+        services: true
+      }
+    });
+  } catch (error) {
+    console.warn('[HomePage] Database query notice, using fallback records:', error);
+  }
+
+  // Ensure fallbacks if database was empty
+  if (!apartmentsForSale || apartmentsForSale.length === 0) {
+    apartmentsForSale = FALLBACK_PROPERTIES.filter(
+      (p) => p.status === 'ACTIVE' && p.listingIntent === 'SALE' && ['Apartment', 'Penthouse', 'Studio'].includes(p.propertyType)
+    ).slice(0, 3);
+  }
+  if (!apartmentsForRent || apartmentsForRent.length === 0) {
+    apartmentsForRent = FALLBACK_PROPERTIES.filter(
+      (p) => p.status === 'ACTIVE' && p.listingIntent === 'RENT' && ['Apartment', 'Penthouse', 'Studio'].includes(p.propertyType)
+    ).slice(0, 3);
+  }
+  if (!featuredVerified || featuredVerified.length === 0) {
+    featuredVerified = FALLBACK_PROPERTIES.filter((p) => p.verificationLevel >= 3).slice(0, 3);
+  }
 
   const mapToApartmentItem = (item: any) => ({
     id: item.id,

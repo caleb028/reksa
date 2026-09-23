@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { db } from '@/lib/db';
 import { ApartmentCard } from '@/components/marketplace/ApartmentCard';
+import { KENYA_COUNTIES } from '@/lib/constants/kenya';
+import { getFallbackApartmentsForRent } from '@/lib/fallbackData';
 import { Building2, MapPin } from 'lucide-react';
 
 interface PageProps {
@@ -14,29 +16,54 @@ interface PageProps {
 export default async function CountyApartmentsForRentPage({ params }: PageProps) {
   const decodedCounty = decodeURIComponent(params.county);
 
-  const countyRecord = await db.county.findFirst({
-    where: { name: { equals: decodedCounty } }
-  });
+  let countyRecord: any = null;
+  let apartments: any[] = [];
 
-  if (!countyRecord) {
-    notFound();
+  try {
+    countyRecord = await db.county.findFirst({
+      where: { name: { equals: decodedCounty } }
+    });
+
+    if (countyRecord) {
+      apartments = await db.property.findMany({
+        where: {
+          status: 'ACTIVE',
+          listingIntent: 'RENT',
+          propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] },
+          countyId: countyRecord.id
+        },
+        include: {
+          county: true,
+          neighbourhood: true,
+          images: { take: 1, orderBy: { orderIndex: 'asc' } },
+          passport: true
+        },
+        orderBy: { trustScore: 'desc' }
+      });
+    }
+  } catch (error) {
+    console.warn('[CountyApartmentsForRentPage] Database query notice, using fallback data:', error);
   }
 
-  const apartments = await db.property.findMany({
-    where: {
-      status: 'ACTIVE',
-      listingIntent: 'RENT',
-      propertyType: { in: ['Apartment', 'Penthouse', 'Studio'] },
-      countyId: countyRecord.id
-    },
-    include: {
-      county: true,
-      neighbourhood: true,
-      images: { take: 1, orderBy: { orderIndex: 'asc' } },
-      passport: true
-    },
-    orderBy: { trustScore: 'desc' }
-  });
+  if (!countyRecord) {
+    const matchedCounty = KENYA_COUNTIES.find(
+      (c) => c.name.toLowerCase() === decodedCounty.toLowerCase()
+    );
+    if (!matchedCounty) {
+      notFound();
+    }
+    countyRecord = {
+      id: matchedCounty.code.toString(),
+      name: matchedCounty.name,
+      capital: matchedCounty.capital
+    };
+  }
+
+  if (!apartments || apartments.length === 0) {
+    apartments = getFallbackApartmentsForRent({
+      county: countyRecord.name
+    });
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -94,10 +121,10 @@ export default async function CountyApartmentsForRentPage({ params }: PageProps)
                 furnishingStatus: apt.furnishingStatus,
                 town: apt.town,
                 estate: apt.estate,
-                countyName: apt.county.name,
+                countyName: apt.county?.name || countyRecord.name,
                 trustScore: apt.trustScore,
                 verificationLevel: apt.verificationLevel,
-                imageUrl: apt.images[0]?.url,
+                imageUrl: apt.images?.[0]?.url || 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
                 isFeatured: apt.isFeatured
               }}
             />

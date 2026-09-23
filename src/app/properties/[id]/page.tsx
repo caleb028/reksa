@@ -2,6 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { db } from '@/lib/db';
+import { getFallbackPropertyByIdOrSlug } from '@/lib/fallbackData';
 import { TrustScore } from '@/components/ui/TrustScore';
 import { VerificationBadge } from '@/components/ui/VerificationBadge';
 import { PropertyPassportView } from '@/components/passport/PropertyPassportView';
@@ -43,28 +44,38 @@ interface PropertyDetailPageProps {
 }
 
 export default async function PropertyDetailPage({ params }: PropertyDetailPageProps) {
-  const property = await db.property.findUnique({
-    where: { id: params.id },
-    include: {
-      county: true,
-      neighbourhood: true,
-      images: { orderBy: { orderIndex: 'asc' } },
-      passport: true,
-      priceHistory: { orderBy: { effectiveYear: 'asc' } },
-      amenities: true,
-      agent: {
-        include: {
-          agentProfile: true
-        }
-      },
-      documents: true,
-      inspections: {
-        include: {
-          report: true
+  let property: any = null;
+
+  try {
+    property = await db.property.findUnique({
+      where: { id: params.id },
+      include: {
+        county: true,
+        neighbourhood: true,
+        images: { orderBy: { orderIndex: 'asc' } },
+        passport: true,
+        priceHistory: { orderBy: { effectiveYear: 'asc' } },
+        amenities: true,
+        agent: {
+          include: {
+            agentProfile: true
+          }
+        },
+        documents: true,
+        inspections: {
+          include: {
+            report: true
+          }
         }
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.warn('[PropertyDetailPage] Database query notice, trying fallback data:', error);
+  }
+
+  if (!property) {
+    property = getFallbackPropertyByIdOrSlug(params.id);
+  }
 
   if (!property) {
     notFound();

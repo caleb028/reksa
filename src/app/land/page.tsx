@@ -3,21 +3,33 @@ import Link from 'next/link';
 import { db } from '@/lib/db';
 import { KENYA_COUNTIES } from '@/lib/constants/kenya';
 import { PropertyCard } from '@/components/marketplace/PropertyCard';
+import { getFallbackAllProperties } from '@/lib/fallbackData';
 import { Compass, ShieldCheck, MapPin, CheckCircle, FileCheck, Layers } from 'lucide-react';
 
 export default async function LandPage() {
-  const landListings = await db.property.findMany({
-    where: {
-      propertyType: 'Land',
-      status: 'ACTIVE'
-    },
-    include: {
-      county: true,
-      neighbourhood: true,
-      images: true,
-      passport: true
-    }
-  });
+  let landListings: any[] = [];
+
+  try {
+    landListings = await db.property.findMany({
+      where: {
+        propertyType: 'Land',
+        status: 'ACTIVE'
+      },
+      include: {
+        county: true,
+        neighbourhood: true,
+        images: true,
+        passport: true
+      }
+    });
+  } catch (error) {
+    console.warn('[LandPage] Database query notice, using fallback records:', error);
+    landListings = getFallbackAllProperties({ type: 'Land' });
+  }
+
+  if (!landListings || landListings.length === 0) {
+    landListings = getFallbackAllProperties({ type: 'Land' });
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -65,10 +77,10 @@ export default async function LandPage() {
               sizeSqm: p.sizeSqm,
               town: p.town,
               estate: p.estate,
-              countyName: p.county.name,
+              countyName: p.county?.name || 'Kenya',
               trustScore: p.trustScore,
               verificationLevel: p.verificationLevel,
-              imageUrl: p.images[0]?.url
+              imageUrl: p.images?.[0]?.url || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80'
             }}
           />
         ))}
