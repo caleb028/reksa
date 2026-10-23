@@ -170,7 +170,19 @@ export function WorkspaceSwitcher({ activeWorkspace, onSelectWorkspace }: Props)
               })}
             </div>
 
-            <div className="mt-2 border-t border-slate-100 pt-2 dark:border-slate-800">
+            <div className="mt-2 border-t border-slate-100 pt-2 dark:border-slate-800 space-y-1">
+              <Link
+                href="/admin"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-between rounded-xl px-2.5 py-2 text-xs font-bold text-red-700 bg-red-50/70 hover:bg-red-100/70 dark:text-red-400 dark:bg-red-950/30 dark:hover:bg-red-950/60 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-red-600" />
+                  <span>Launch Super Admin Portal</span>
+                </div>
+                <span className="text-[10px] font-mono font-bold">/admin →</span>
+              </Link>
+
               <Link
                 href="/onboarding/business"
                 onClick={() => setIsOpen(false)}

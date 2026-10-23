@@ -206,31 +206,31 @@ export default async function HomePage() {
         <MegaSearch />
 
         {/* Real Estate Platform Intelligence Counters */}
-        <div className="mt-8 mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white/90 p-5 sm:p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90 backdrop-blur-md">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-slate-800">
-            <div className="pt-2 sm:pt-0">
-              <span className="block text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+        <div className="mt-6 sm:mt-8 mx-auto max-w-4xl rounded-2xl sm:rounded-3xl border border-slate-200 bg-white/90 p-4 sm:p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90 backdrop-blur-md">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 text-center">
+            <div className="rounded-xl bg-slate-50/70 p-3 sm:p-0 sm:bg-transparent dark:bg-slate-800/40 sm:dark:bg-transparent">
+              <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
                 <AnimatedCounter value={totalCounties || 47} suffix=" Counties" />
               </span>
-              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Spatial Coverage</span>
+              <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mt-0.5">Spatial Coverage</span>
             </div>
-            <div className="pt-4 sm:pt-0 sm:pl-6">
-              <span className="block text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
+            <div className="rounded-xl bg-slate-50/70 p-3 sm:p-0 sm:bg-transparent dark:bg-slate-800/40 sm:dark:bg-transparent">
+              <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
                 <AnimatedCounter value={totalProperties} suffix=" Listings" />
               </span>
-              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Verified Properties</span>
+              <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mt-0.5">Verified Properties</span>
             </div>
-            <div className="pt-4 sm:pt-0 sm:pl-6">
-              <span className="block text-2xl sm:text-3xl font-black text-teal-600 dark:text-teal-400 tracking-tight">
+            <div className="rounded-xl bg-slate-50/70 p-3 sm:p-0 sm:bg-transparent dark:bg-slate-800/40 sm:dark:bg-transparent">
+              <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-teal-600 dark:text-teal-400 tracking-tight">
                 <AnimatedCounter value={totalApartments} suffix=" Units" />
               </span>
-              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Apartment Portfolios</span>
+              <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mt-0.5">Apartment Units</span>
             </div>
-            <div className="pt-4 sm:pt-0 sm:pl-6">
-              <span className="block text-2xl sm:text-3xl font-black text-[#c59228] tracking-tight">
+            <div className="rounded-xl bg-slate-50/70 p-3 sm:p-0 sm:bg-transparent dark:bg-slate-800/40 sm:dark:bg-transparent">
+              <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-[#c59228] tracking-tight">
                 <AnimatedCounter value={totalDevelopments} suffix=" Projects" />
               </span>
-              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Master Developments</span>
+              <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mt-0.5">Developments</span>
             </div>
           </div>
         </div>

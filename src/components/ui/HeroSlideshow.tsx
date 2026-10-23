@@ -146,7 +146,7 @@ export function HeroSlideshow() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative h-[620px] sm:h-[680px] lg:h-[720px] w-full overflow-hidden bg-slate-950 text-white focus:outline-none"
+      className="relative h-[560px] sm:h-[660px] lg:h-[720px] w-full overflow-hidden bg-slate-950 text-white focus:outline-none"
     >
       {/* Background Images with Crossfade & Subtle Ken Burns Zoom */}
       {SLIDES.map((s, index) => {
@@ -174,16 +174,16 @@ export function HeroSlideshow() {
       })}
 
       {/* Content Container with Sequential Staggered Entrance */}
-      <div className="relative z-20 mx-auto flex h-full max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 mx-auto flex h-full max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8 pt-4 sm:pt-0">
         <div key={currentSlide} className="max-w-3xl">
           {/* 1. Tagline Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-950/70 px-3.5 py-1.5 text-xs font-semibold text-emerald-300 backdrop-blur-md mb-5 animate-fade-down [animation-delay:100ms]">
-            <ShieldCheck className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-emerald-500/40 bg-emerald-950/70 px-3 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold text-emerald-300 backdrop-blur-md mb-3.5 sm:mb-5 animate-fade-down [animation-delay:100ms]">
+            <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-400 flex-shrink-0" />
             <span>{slide.tagline}</span>
           </div>
 
           {/* 2. Heading */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-white animate-fade-up [animation-delay:250ms]">
+          <h1 className="text-2xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.18] sm:leading-[1.15] text-white animate-fade-up [animation-delay:250ms]">
             {slide.title}{' '}
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300 bg-clip-text text-transparent">
               {slide.highlight}
@@ -191,15 +191,15 @@ export function HeroSlideshow() {
           </h1>
 
           {/* 3. Description */}
-          <p className="mt-4 text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed animate-fade-up [animation-delay:450ms]">
+          <p className="mt-2.5 sm:mt-4 text-xs sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed animate-fade-up [animation-delay:450ms] line-clamp-3 sm:line-clamp-none">
             {slide.description}
           </p>
 
           {/* 4. Action CTAs */}
-          <div className="mt-8 flex flex-wrap items-center gap-3.5 animate-fade-up [animation-delay:650ms]">
+          <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto animate-fade-up [animation-delay:650ms]">
             <Link
               href={slide.primaryCtaHref}
-              className="inline-flex items-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-premium transition-all duration-300 hover:scale-105 hover:bg-emerald-500 active:scale-[0.98] focus:ring-2 focus:ring-emerald-400 focus:outline-none"
+              className="inline-flex items-center justify-center gap-2 rounded-xl sm:rounded-2xl bg-emerald-600 px-5 sm:px-6 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white shadow-premium transition-all duration-300 hover:scale-105 hover:bg-emerald-500 active:scale-[0.98] focus:ring-2 focus:ring-emerald-400 focus:outline-none"
             >
               <span>{slide.primaryCtaText}</span>
               <ArrowRight className="h-4 w-4" />
@@ -207,7 +207,7 @@ export function HeroSlideshow() {
 
             <Link
               href={slide.secondaryCtaHref}
-              className="inline-flex items-center gap-2 rounded-2xl border border-slate-700/80 bg-slate-900/80 px-5 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur-md hover:border-slate-500 hover:bg-slate-800 transition-all duration-300 active:scale-[0.98] focus:ring-2 focus:ring-emerald-400 focus:outline-none"
+              className="inline-flex items-center justify-center gap-2 rounded-xl sm:rounded-2xl border border-slate-700/80 bg-slate-900/80 px-4 sm:px-5 py-2.5 sm:py-3.5 text-xs sm:text-sm font-semibold text-slate-200 backdrop-blur-md hover:border-slate-500 hover:bg-slate-800 transition-all duration-300 active:scale-[0.98] focus:ring-2 focus:ring-emerald-400 focus:outline-none"
             >
               <span>{slide.secondaryCtaText}</span>
             </Link>

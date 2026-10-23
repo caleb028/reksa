@@ -75,7 +75,7 @@ export function MegaSearch() {
   return (
     <div ref={containerRef} className="relative w-full max-w-4xl mx-auto z-40">
       {/* Clean Intent Switcher */}
-      <div className="flex items-center gap-1.5 mb-3 bg-slate-900/40 p-1 rounded-2xl w-fit backdrop-blur-md border border-white/10">
+      <div className="flex items-center gap-1 sm:gap-1.5 mb-3 bg-slate-900/50 p-1 rounded-2xl max-w-full overflow-x-auto no-scrollbar backdrop-blur-md border border-white/10">
         {[
           { label: 'Buy Property', val: 'SALE' },
           { label: 'Rent Property', val: 'RENT' },
@@ -87,7 +87,7 @@ export function MegaSearch() {
               key={tab.label}
               type="button"
               onClick={() => setSelectedIntent(tab.val as any)}
-              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all duration-200 ${
+              className={`rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-bold transition-all duration-200 whitespace-nowrap ${
                 isActive
                   ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-900 dark:text-white'
                   : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -102,22 +102,22 @@ export function MegaSearch() {
       {/* Main Search Bar Box */}
       <form
         onSubmit={handleSearch}
-        className={`flex flex-col sm:flex-row items-stretch gap-2 rounded-2xl border bg-white p-2.5 shadow-premium transition-all duration-300 dark:bg-slate-900 ${
+        className={`flex flex-col sm:flex-row items-stretch gap-2 rounded-2xl border bg-white p-2 sm:p-2.5 shadow-premium transition-all duration-300 dark:bg-slate-900 ${
           isFocused
-            ? 'border-emerald-500 ring-4 ring-emerald-500/20 shadow-2xl scale-[1.01]'
+            ? 'border-emerald-500 ring-4 ring-emerald-500/20 shadow-2xl scale-[1.005]'
             : 'border-slate-200/90 hover:border-slate-300 dark:border-slate-800'
         }`}
       >
         {/* Search Keyword Input */}
-        <div className="relative flex-1 flex items-center pl-3">
-          <Search className={`h-5 w-5 transition-colors ${isFocused ? 'text-emerald-600' : 'text-slate-400'}`} />
+        <div className="relative flex-1 flex items-center pl-2 sm:pl-3">
+          <Search className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-colors ${isFocused ? 'text-emerald-600' : 'text-slate-400'}`} />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsFocused(true)}
-            placeholder="Search county, neighbourhood, estate, or project name..."
-            className="w-full bg-transparent px-3.5 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none dark:text-white dark:placeholder-slate-500"
+            placeholder="Search county, estate, or project..."
+            className="w-full bg-transparent px-2.5 sm:px-3.5 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none dark:text-white dark:placeholder-slate-500"
           />
           {query && (
             <button
@@ -131,12 +131,12 @@ export function MegaSearch() {
         </div>
 
         {/* County Selector */}
-        <div className="flex items-center border-t sm:border-t-0 sm:border-l border-slate-200/80 px-3 py-1.5 dark:border-slate-800">
-          <MapPin className="h-4 w-4 text-emerald-600 mr-2 flex-shrink-0" />
+        <div className="flex items-center border-t sm:border-t-0 sm:border-l border-slate-200/80 px-2.5 sm:px-3 py-1.5 dark:border-slate-800">
+          <MapPin className="h-4 w-4 text-emerald-600 mr-1.5 sm:mr-2 flex-shrink-0" />
           <select
             value={selectedCounty}
             onChange={(e) => setSelectedCounty(e.target.value)}
-            className="bg-transparent text-xs font-semibold text-slate-700 focus:outline-none dark:text-slate-200 cursor-pointer py-2"
+            className="w-full sm:w-auto bg-transparent text-xs font-semibold text-slate-700 focus:outline-none dark:text-slate-200 cursor-pointer py-1.5 sm:py-2"
           >
             <option value="All Counties">All 47 Counties</option>
             {KENYA_COUNTIES.map((c) => (
@@ -151,7 +151,7 @@ export function MegaSearch() {
         <button
           type="submit"
           disabled={isSearching}
-          className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-7 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-emerald-500 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-emerald-400 disabled:opacity-75"
+          className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-sm transition-all hover:bg-emerald-500 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-emerald-400 disabled:opacity-75"
         >
           {isSearching ? (
             <>

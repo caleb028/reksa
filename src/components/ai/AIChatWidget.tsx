@@ -59,15 +59,15 @@ export function AIChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-50">
       {/* Trigger Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2 rounded-full bg-emerald-700 px-4 py-3 text-white shadow-premium transition-all duration-300 hover:scale-105 hover:bg-emerald-800"
+          className="group flex items-center gap-2 rounded-full bg-emerald-700 px-3.5 py-2.5 sm:px-4 sm:py-3 text-white shadow-premium transition-all duration-300 hover:scale-105 hover:bg-emerald-800"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0a3871]">
-            <Bot className="h-4 w-4 text-[#c59228]" />
+          <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-[#0a3871]">
+            <Bot className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#c59228]" />
           </div>
           <span className="text-xs font-extrabold tracking-wide">Ask A&E AI</span>
           <span className="flex h-2 w-2 rounded-full bg-[#c59228] animate-ping" />
@@ -76,7 +76,7 @@ export function AIChatWidget() {
 
       {/* Expanded Chat Window */}
       {isOpen && (
-        <div className="flex h-[520px] w-[360px] sm:w-[400px] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900 animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="flex h-[min(520px,calc(100vh-5rem))] w-[calc(100vw-1.5rem)] sm:w-[390px] max-w-[400px] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900 animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between bg-[#0a3871] px-4 py-3 text-white">
             <div className="flex items-center gap-2.5">

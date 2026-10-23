@@ -1448,14 +1448,23 @@ export default function DashboardPage() {
         {/* ========================================================================= */}
         {activeWorkspace.type === 'ADMIN' && (
           <div className="space-y-8 animate-in fade-in duration-200">
-            <div className="rounded-3xl border border-red-200 bg-red-50/50 p-6 dark:border-red-900/40 dark:bg-red-950/20 shadow-card">
-              <div className="flex items-center gap-2 text-red-800 dark:text-red-300 font-bold text-sm mb-1">
-                <ShieldCheck className="w-5 h-5" />
-                <span>A&E Master System Intelligence Console</span>
+            <div className="rounded-3xl border border-red-200 bg-red-50/50 p-6 dark:border-red-900/40 dark:bg-red-950/20 shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 text-red-800 dark:text-red-300 font-bold text-sm mb-1">
+                  <ShieldCheck className="w-5 h-5" />
+                  <span>A&E Master System Intelligence Console</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300">
+                  Authoritative verification queue, fraud mitigation holds, and platform-wide audit trail.
+                </p>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300">
-                Authoritative verification queue, fraud mitigation holds, and platform-wide audit trail.
-              </p>
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-red-700 px-4 py-2 text-xs font-bold text-white hover:bg-red-800 shadow-sm shrink-0 self-start sm:self-auto"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>Open Dedicated Super Admin Portal (/admin) →</span>
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
